@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Jost:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+
+    :root {
+      --navy: #0D2244;
+      --navy2: #152d5a;
+      --gold: #C9A84C;
+      --gold2: #e8c870;
+      --cream: #F5F0E8;
+      --light: #fdfcf9;
+      --text: #1a1a2e;
+      --muted: #6b6b80;
+      --white: #fff;
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--light);
+      color: var(--text);
+      overflow-x: hidden
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      background: rgba(13, 34, 68, 0.97);
+      backdrop-filter: blur(12px);
+      padding: 14px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(201, 168, 76, 0.25)
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px
+    }
+
+    .nav-logo-circle {
+      width: 42px;
+      height: 42px;
+      background: var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--navy);
+      letter-spacing: 1px
+    }
+
+    .nav-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--white);
+      letter-spacing: 2px
+    }
+
+    .nav-brand span {
+      color: var(--gold)
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px
+    }
+
+    .nav-links a {
+      color: rgba(255, 255, 255, 0.75);
+      text-decoration: none;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: color .3s;
+      font-weight: 500
+    }
+
+    .nav-links a:hover {
+      color: var(--gold)
+    }
+
+    .nav-cta {
+      background: var(--gold);
+      color: var(--navy);
+      border: none;
+      padding: 10px 24px;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .3s;
+      font-family: 'Jost', sans-serif
+    }
+
+    .nav-cta:hover {
+      background: var(--gold2);
+      transform: translateY(-1px)
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding-top: 70px
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      overflow: hidden
+    }
+
+    .hero-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px)
+    }
+
+    .orb1 {
+      width: 500px;
+      height: 500px;
+      background: rgba(201, 168, 76, 0.08);
+      top: -100px;
+      right: -100px;
+      animation: float1 8s ease-in-out infinite
+    }
+
+    .orb2 {
+      width: 300px;
+      height: 300px;
+      background: rgba(201, 168, 76, 0.05);
+      bottom: 100px;
+      left: -50px;
+      animation: float2 10s ease-in-out infinite
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(201, 168, 76, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(201, 168, 76, 0.04) 1px, transparent 1px);
+      background-size: 60px 60px
+    }
+
+    @keyframes float1 {
+
+      0%,
+      100% {
+        transform: translate(0, 0) scale(1)
+      }
+
+      50% {
+        transform: translate(-30px, 30px) scale(1.1)
+      }
+    }
+
+    @keyframes float2 {
+
+      0%,
+      100% {
+        transform: translate(0, 0) scale(1)
+      }
+
+      50% {
+        transform: translate(20px, -20px) scale(0.95)
+      }
+    }
+
+    .hero-content {
+      position: relative;
+      text-align: center;
+      padding: 0 20px;
+      max-width: 900px
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(201, 168, 76, 0.4);
+      color: var(--gold);
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      padding: 8px 20px;
+      margin-bottom: 40px;
+      animation: fadeUp 1s both
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 20px;
+      height: 1px;
+      background: var(--gold)
+    }
+
+    .hero-badge::after {
+      content: '';
+      width: 20px;
+      height: 1px;
+      background: var(--gold)
+    }
+
+    .hero-h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(52px, 8vw, 96px);
+      font-weight: 300;
+      line-height: 0.95;
+      color: var(--white);
+      margin-bottom: 24px;
+      animation: fadeUp 1s .15s both;
+      letter-spacing: -2px
+    }
+
+    .hero-h1 em {
+      font-style: italic;
+      color: var(--gold)
+    }
+
+    .hero-h1 .line2 {
+      display: block;
+      font-size: clamp(38px, 6vw, 72px)
+    }
+
+    .hero-sub {
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.55);
+      letter-spacing: 1px;
+      max-width: 500px;
+      margin: 0 auto 48px;
+      animation: fadeUp 1s .3s both;
+      line-height: 1.8
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeUp 1s .45s both
+    }
+
+    .btn-gold {
+      background: var(--gold);
+      color: var(--navy);
+      padding: 16px 36px;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all .3s;
+      font-family: 'Jost', sans-serif;
+      text-decoration: none;
+      display: inline-block
+    }
+
+    .btn-gold:hover {
+      background: var(--gold2);
+      transform: translateY(-2px)
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      padding: 16px 36px;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 600;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+      transition: all .3s;
+      font-family: 'Jost', sans-serif;
+      text-decoration: none;
+      display: inline-block
+    }
+
+    .btn-outline:hover {
+      border-color: var(--gold);
+      color: var(--gold)
+    }
+
+    .hero-stats {
+      position: absolute;
+      bottom: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 60px;
+      animation: fadeUp 1s .6s both;
+      width: 100%;
+    }
+
+    .stat {
+      text-align: center
+    }
+
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px;
+      font-weight: 600;
+      color: var(--gold);
+      line-height: 1
+    }
+
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.4);
+      margin-top: 4px
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1px;
+      height: 50px;
+      background: linear-gradient(to bottom, transparent, rgba(201, 168, 76, 0.6));
+      animation: scrollPulse 2s ease-in-out infinite
+    }
+
+    @keyframes scrollPulse {
+
+      0%,
+      100% {
+        opacity: 0;
+        transform: translateX(-50%) scaleY(0)
+      }
+
+      50% {
+        opacity: 1;
+        transform: translateX(-50%) scaleY(1)
+      }
+    }
+
+    /* SECTION BASE */
+    section {
+      padding: 100px 40px
+    }
+
+    .section-label {
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px
+    }
+
+    .section-label::before {
+      content: '';
+      width: 30px;
+      height: 1px;
+      background: var(--gold)
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 5vw, 60px);
+      font-weight: 300;
+      line-height: 1;
+      margin-bottom: 20px
+    }
+
+    .section-title em {
+      font-style: italic;
+      color: var(--gold)
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto
+    }
+
+    /* ABOUT */
+    .about {
+      background: var(--cream)
+    }
+
+    .about-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center
+    }
+
+    .about-text p {
+      font-size: 16px;
+      line-height: 1.9;
+      color: var(--muted);
+      margin-bottom: 20px
+    }
+
+    .about-highlight {
+      border-left: 3px solid var(--gold);
+      padding: 20px 24px;
+      background: white;
+      margin: 32px 0;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-style: italic;
+      color: var(--navy);
+      line-height: 1.5
+    }
+
+    .about-img {
+      position: relative
+    }
+
+    .about-card {
+      background: var(--navy);
+      padding: 40px;
+      color: white;
+      position: relative
+    }
+
+    .about-card::before {
+      content: '';
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      right: -12px;
+      bottom: -12px;
+      border: 1px solid rgba(201, 168, 76, 0.3)
+    }
+
+    .about-photo {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--gold);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--navy);
+      font-family: 'Jost', sans-serif;
+      overflow: hidden
+    }
+
+    .about-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%
+    }
+
+    .about-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 600;
+      color: white;
+      margin-bottom: 4px
+    }
+
+    .about-role {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 24px
+    }
+
+    .about-contacts {
+      display: flex;
+      flex-direction: column;
+      gap: 12px
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.7)
+    }
+
+    .contact-icon {
+      width: 32px;
+      height: 32px;
+      border: 1px solid rgba(201, 168, 76, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0
+    }
+
+    /* SERVICES */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      margin-top: 60px
+    }
+
+    .service-card {
+      background: white;
+      padding: 40px 28px;
+      border-bottom: 3px solid transparent;
+      transition: all .4s;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transition: transform .4s;
+      transform-origin: left
+    }
+
+    .service-card:hover::before {
+      transform: scaleX(1)
+    }
+
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(13, 34, 68, 0.1)
+    }
+
+    .service-icon {
+      width: 56px;
+      height: 56px;
+      background: var(--cream);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 20px;
+      transition: all .4s
+    }
+
+    .service-card:hover .service-icon {
+      background: var(--gold);
+      transform: scale(1.1)
+    }
+
+    .service-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 12px
+    }
+
+    .service-desc {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--muted)
+    }
+
+    .service-num {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 48px;
+      font-weight: 300;
+      color: rgba(13, 34, 68, 0.06);
+      line-height: 1
+    }
+
+    /* WHY US */
+    .why {
+      background: var(--navy);
+      color: white
+    }
+
+    .why .section-label {
+      color: var(--gold)
+    }
+
+    .why .section-title {
+      color: white
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 40px;
+      margin-top: 60px
+    }
+
+    .why-item {
+      border-top: 1px solid rgba(201, 168, 76, 0.2);
+      padding-top: 32px
+    }
+
+    .why-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 56px;
+      font-weight: 300;
+      color: rgba(201, 168, 76, 0.2);
+      line-height: 1;
+      margin-bottom: 16px
+    }
+
+    .why-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      color: white;
+      margin-bottom: 12px
+    }
+
+    .why-desc {
+      font-size: 14px;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.5)
+    }
+
+    /* CONTACT BAND */
+    .contact-band {
+      background: var(--gold);
+      padding: 60px 40px;
+      text-align: center
+    }
+
+    .contact-band h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 48px;
+      font-weight: 300;
+      color: var(--navy);
+      margin-bottom: 8px
+    }
+
+    .contact-band p {
+      color: rgba(13, 34, 68, 0.7);
+      font-size: 14px;
+      margin-bottom: 24px;
+      letter-spacing: 1px
+    }
+
+    .contact-band-links {
+      display: flex;
+      gap: 32px;
+      justify-content: center;
+      flex-wrap: wrap
+    }
+
+    .contact-band-links a {
+      color: var(--navy);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      border-bottom: 1px solid rgba(13, 34, 68, 0.3);
+      padding-bottom: 2px;
+      transition: border-color .3s
+    }
+
+    .contact-band-links a:hover {
+      border-color: var(--navy)
+    }
+
+    /* CANDIDATURE FORM */
+    .candidature {
+      background: var(--cream)
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      margin-top: 60px
+    }
+
+    .form-info p {
+      font-size: 15px;
+      line-height: 1.9;
+      color: var(--muted);
+      margin-bottom: 24px
+    }
+
+    .form-info ul {
+      list-style: none;
+      padding: 0
+    }
+
+    .form-info li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 16px;
+      line-height: 1.6
+    }
+
+    .form-info li::before {
+      content: '—';
+      color: var(--gold);
+      font-weight: 600;
+      flex-shrink: 0
+    }
+
+    .form-box {
+      background: white;
+      padding: 48px
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 20px
+    }
+
+    .form-row.full {
+      grid-template-columns: 1fr;
+      margin-bottom: 20px
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px
+    }
+
+    .form-group label {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--navy);
+      font-weight: 600
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      border: none;
+      border-bottom: 1px solid #ddd;
+      padding: 12px 0;
+      font-size: 15px;
+      font-family: 'Jost', sans-serif;
+      color: var(--text);
+      background: transparent;
+      outline: none;
+      transition: border-color .3s;
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--gold)
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+      line-height: 1.6
+    }
+
+    .form-group select {
+      cursor: pointer
+    }
+
+    .form-submit {
+      background: var(--navy);
+      color: white;
+      border: none;
+      padding: 18px 48px;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .3s;
+      font-family: 'Jost', sans-serif;
+      margin-top: 16px;
+      width: 100%
+    }
+
+    .form-submit:hover {
+      background: var(--navy2);
+      transform: translateY(-2px)
+    }
+
+    #form-success {
+      display: none;
+      background: var(--navy);
+      color: var(--gold);
+      padding: 16px;
+      text-align: center;
+      font-size: 14px;
+      letter-spacing: 1px;
+      margin-top: 16px
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--navy);
+      padding: 60px 40px 30px;
+      color: white
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 60px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08)
+    }
+
+    .footer-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 300;
+      color: white;
+      letter-spacing: 2px;
+      margin-bottom: 12px
+    }
+
+    .footer-brand span {
+      color: var(--gold)
+    }
+
+    .footer-tagline {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.4);
+      line-height: 1.7;
+      max-width: 260px
+    }
+
+    .footer-col h4 {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px
+    }
+
+    .footer-col ul {
+      list-style: none
+    }
+
+    .footer-col li {
+      margin-bottom: 10px;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.5)
+    }
+
+    .footer-col a {
+      color: rgba(255, 255, 255, 0.5);
+      text-decoration: none;
+      transition: color .3s
+    }
+
+    .footer-col a:hover {
+      color: var(--gold)
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 30px;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.25)
+    }
+
+    .social-links {
+      display: flex;
+      gap: 16px
+    }
+
+    .social-link {
+      width: 36px;
+      height: 36px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.5);
+      text-decoration: none;
+      transition: all .3s
+    }
+
+    .social-link:hover {
+      border-color: var(--gold);
+      color: var(--gold)
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all .8s cubic-bezier(0.16, 1, 0.3, 1)
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0)
+    }
+
+    /* RESPONSIVE MOBILE */
+    @media(max-width:768px) {
+      nav {
+        padding: 14px 20px
+      }
+
+      .nav-links,
+      .nav-cta {
+        display: none
+      }
+
+      section {
+        padding: 70px 20px
+      }
+
+      .about-inner,
+      .form-grid,
+      .services-grid,
+      .why-grid,
+      .footer-top {
+        grid-template-columns: 1fr
+      }
+
+      .form-row {
+        grid-template-columns: 1fr
+      }
+
+      .hero-stats {
+        gap: 32px;
+        bottom: 30px
+      }
+
+      .contact-band-links {
+        flex-direction: column;
+        align-items: center
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">
+      <div class="nav-logo-circle">TGT</div>
+      <div class="nav-brand">TGT<span>Propreté</span></div>
+    </div>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#about">Équipe</a>
+      <a href="#zones">Zones</a>
+      <a href="#candidature">Rejoindre</a>
+    </div>
+    <button class="nav-cta" onclick="document.getElementById('candidature').scrollIntoView({behavior:'smooth'})">Devis
+      Gratuit</button>
+  </nav>
+
+  <!-- HERO -->z
+  <section class="hero" id="home">
+    <div class="hero-bg">
+      <div class="hero-grid"></div>
+      <div class="hero-orb orb1"></div>
+      <div class="hero-orb orb2"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">Île-de-France · Depuis 2018</div>
+      <h1 class="hero-h1">
+        Entretien &amp;<br>
+        <em>Nettoyage</em><br>
+        <span class="line2">d'Excellence</span>
+      </h1>
+      <p class="hero-sub">Particuliers, entreprises et chantiers — une propreté irréprochable livrée avec soin et
+        professionnalisme.</p>
+      <div class="hero-btns">
+        <a href="#services" class="btn-gold">Nos Services</a>
+        <a href="#candidature" class="btn-outline">Nous Contacter</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">6+</div>
+        <div class="stat-label">Ans d'expérience</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Types de clients</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Satisfaction</div>
+      </div>
+    </div>
+    <div class="hero-scroll"></div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-inner">
+        <div class="about-text reveal">
+          <div class="section-label">Notre Histoire</div>
+          <h2 class="section-title">Une entreprise bâtie sur la <em>confiance</em></h2>
+          <p>Fondée en Île-de-France, TGT Propreté est née d'une passion pour le travail soigné et le souci du détail.
+            Avec plus de 6 ans d'expérience, nous avons bâti notre réputation sur des valeurs simples : rigueur,
+            ponctualité et respect de votre espace.</p>
+          <p>Chaque intervention est pour nous l'occasion de dépasser vos attentes, qu'il s'agisse de votre domicile, de
+            vos bureaux ou d'un chantier en fin de travaux.</p>
+          <blockquote class="about-highlight">"Ce qui se cache à l'œil nu, nous le voyons."</blockquote>
+        </div>
+        <div class="about-img reveal">
+          <div class="about-card">
+            <div class="about-photo"><img src="/mnt/user-data/uploads/1.jpg" alt="Rabah Ammouche"
+                onerror="this.parentElement.textContent='RA'"></div>
+            <div class="about-name">Rabah Ammouche</div>
+            <div class="about-role">Chargé d'Affaire</div>
+            <div class="about-contacts">
+              <div class="contact-item">
+                <div class="contact-icon">✆</div>+33 7 52 08 11 44
+              </div>
+              <div class="contact-item">
+                <div class="contact-icon">✆</div>+33 7 69 91 57 34
+              </div>
+              <div class="contact-item">
+                <div class="contact-icon">✉</div>Tgtproprete@gmail.com
+              </div>
+              <div class="contact-item">
+                <div class="contact-icon">⌂</div>57 Av. Carnot, 93140 Bondy
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" style="background:var(--light);padding:100px 0">
+    <div class="container" style="padding:0 40px">
+      <div style="text-align:center;max-width:600px;margin:0 auto 0" class="reveal">
+        <div class="section-label" style="justify-content:center">Ce Que Nous Faisons</div>
+        <h2 class="section-title">Nos <em>Services</em></h2>
+        <p style="color:var(--muted);font-size:15px;line-height:1.8;margin-top:16px">De votre salon à votre chantier,
+          nous couvrons l'ensemble de vos besoins en nettoyage professionnel.</p>
+      </div>
+    </div>
+    <div style="max-width:1200px;margin:60px auto 0">
+      <div class="services-grid reveal">
+        <div class="service-card">
+          <div class="service-num">01</div>
+          <div class="service-icon">🧹</div>
+          <div class="service-title">Nettoyage Approfondi</div>
+          <p class="service-desc">Nettoyage complet de votre domicile : sols, vitres, cuisine, salle de bain et toutes
+            les surfaces.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-num">02</div>
+          <div class="service-icon">🪟</div>
+          <div class="service-title">Nettoyage des Vitres</div>
+          <p class="service-desc">Intervention professionnelle sur toutes vos vitres et surfaces vitrées, intérieur
+            comme extérieur.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-num">03</div>
+          <div class="service-icon">🏢</div>
+          <div class="service-title">Entreprises &amp; Bureaux</div>
+          <p class="service-desc">Entretien des postes de travail, sanitaires, sols et parties communes. Gestion des
+            déchets incluse.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-num">04</div>
+          <div class="service-icon">🏗️</div>
+          <div class="service-title">Nettoyage Chantier</div>
+          <p class="service-desc">Remise en état complète après travaux ou rénovations : enlèvement des traces de
+            peinture et ciment.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-num">05</div>
+          <div class="service-icon">🧺</div>
+          <div class="service-title">Repassage &amp; Rangement</div>
+          <p class="service-desc">Service de repassage et rangement de vêtements pour particuliers. Soin et discrétion
+            garantis.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-num">06</div>
+          <div class="service-icon">🚿</div>
+          <div class="service-title">Désinfestation</div>
+          <p class="service-desc">Désinfestation complète et gestion professionnelle des déchets pour tous types de
+            locaux.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-num">07</div>
+          <div class="service-icon">📦</div>
+          <div class="service-title">Après Déménagement</div>
+          <p class="service-desc">Nettoyage complet avant ou après votre déménagement. Logement impeccable pour un
+            nouveau départ.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-num">08</div>
+          <div class="service-icon">✨</div>
+          <div class="service-title">Sur Mesure</div>
+          <p class="service-desc">Toute demande particulière étudiée. Contactez-nous pour un devis personnalisé et
+            gratuit.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section class="why" id="zones">
+    <div class="container">
+      <div class="reveal" style="text-align:center">
+        <div class="section-label" style="justify-content:center">Pourquoi Nous ?</div>
+        <h2 class="section-title" style="color:white">L'<em>excellence</em> au quotidien</h2>
+      </div>
+      <div class="why-grid reveal">
+        <div class="why-item">
+          <div class="why-num">6+</div>
+          <div class="why-title">Années d'expérience</div>
+          <p class="why-desc">Forts de plus de 6 ans dans le secteur, nous maîtrisons chaque type d'intervention avec
+            rigueur et méthode.</p>
+        </div>
+        <div class="why-item">
+          <div class="why-num">3</div>
+          <div class="why-title">Types de clients</div>
+          <p class="why-desc">Particuliers, entreprises, chantiers — notre polyvalence nous permet de répondre à tous
+            vos besoins.</p>
+        </div>
+        <div class="why-item">
+          <div class="why-num">★</div>
+          <div class="why-title">Île-de-France</div>
+          <p class="why-desc">Basés à Bondy (93140), nous intervenons dans toute l'Île-de-France avec réactivité et
+            ponctualité.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT BAND -->
+  <div class="contact-band">
+    <h2>Besoin d'un devis ?</h2>
+    <p>Réponse sous 24h — Gratuit &amp; sans engagement</p>
+    <div class="contact-band-links">
+      <a href="tel:+33752081144">✆ +33 7 52 08 11 44</a>
+      <a href="tel:+33769915734">✆ +33 7 69 91 57 34</a>
+      <a href="mailto:Tgtproprete@gmail.com">✉ Tgtproprete@gmail.com</a>
+      <a href="#">📍 57 Av. Carnot, 93140 Bondy</a>
+    </div>
+  </div>
+
+  <!-- CANDIDATURE FORM -->
+  <section class="candidature" id="candidature">
+    <div class="container">
+      <div class="reveal" style="text-align:center;max-width:600px;margin:0 auto 0">
+        <div class="section-label" style="justify-content:center">Nous Rejoindre</div>
+        <h2 class="section-title">Formulaire de <em>Candidature</em></h2>
+        <p style="color:var(--muted);font-size:15px;line-height:1.8;margin-top:16px">Vous êtes motivé, rigoureux et vous
+          aimez le travail bien fait ? Rejoignez l'équipe TGT Propreté.</p>
+      </div>
+      <div class="form-grid reveal">
+        <div class="form-info">
+          <h3
+            style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--navy);margin-bottom:20px">
+            Ce que nous recherchons</h3>
+          <p>TGT Propreté est toujours à la recherche de personnes sérieuses et motivées pour renforcer notre équipe
+            d'intervention en Île-de-France.</p>
+          <ul>
+            <li>Sens du détail et rigueur dans le travail</li>
+            <li>Ponctualité et fiabilité</li>
+            <li>Esprit d'équipe et bon relationnel client</li>
+            <li>Expérience en nettoyage appréciée (non obligatoire)</li>
+            <li>Permis B souhaité pour déplacements</li>
+          </ul>
+          <div style="margin-top:32px;padding:24px;background:var(--navy);color:white">
+            <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px">
+              Contact Direct</div>
+            <div style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.8">Rabah Ammouche<br>+33 7 52 08 11
+              44<br>Tgtproprete@gmail.com</div>
+          </div>
+        </div>
+        <div class="form-box">
+          <form id="candidature-form" onsubmit="submitForm(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Prénom *</label>
+                <input type="text" placeholder="Votre prénom" required>
+              </div>
+              <div class="form-group">
+                <label>Nom *</label>
+                <input type="text" placeholder="Votre nom" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Téléphone *</label>
+                <input type="tel" placeholder="+33 6 XX XX XX XX" required>
+              </div>
+              <div class="form-group">
+                <label>Email *</label>
+                <input type="email" placeholder="votre@email.com" required>
+              </div>
+            </div>
+            <div class="form-row full">
+              <div class="form-group">
+                <label>Poste Souhaité *</label>
+                <select required>
+                  <option value="">Sélectionner un poste</option>
+                  <option>Agent de nettoyage – Particuliers</option>
+                  <option>Agent de nettoyage – Entreprises</option>
+                  <option>Agent de nettoyage – Chantiers</option>
+                  <option>Repassage &amp; Services à domicile</option>
+                  <option>Polyvalent(e)</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row full">
+              <div class="form-group">
+                <label>Disponibilité</label>
+                <select>
+                  <option value="">Sélectionner</option>
+                  <option>Immédiatement</option>
+                  <option>Dans 2 semaines</option>
+                  <option>Dans 1 mois</option>
+                  <option>À définir</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row full">
+              <div class="form-group">
+                <label>Message / Motivation</label>
+                <textarea placeholder="Parlez-nous de vous, votre expérience et vos motivations..."></textarea>
+              </div>
+            </div>
+            <button type="submit" class="form-submit">Envoyer ma Candidature →</button>
+            <div id="form-success">✓ Votre candidature a bien été envoyée ! Nous vous répondrons dans les 24h.</div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand">TGT<span>Propreté</span> <span
+              style="font-size:14px;color:rgba(255,255,255,0.3);letter-spacing:1px">Soigné</span></div>
+          <p class="footer-tagline">Votre partenaire de confiance pour un nettoyage professionnel et soigné en
+            Île-de-France.</p>
+          <div class="social-links" style="margin-top:24px">
+            <a class="social-link" href="#" title="Instagram">in</a>
+            <a class="social-link" href="#" title="LinkedIn">li</a>
+            <a class="social-link" href="#" title="Facebook">f</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li>Nettoyage Approfondi</li>
+            <li>Nettoyage Vitres</li>
+            <li>Entreprises &amp; Bureaux</li>
+            <li>Chantiers</li>
+            <li>Repassage</li>
+            <li>Désinfestation</li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="tel:+33752081144">+33 7 52 08 11 44</a></li>
+            <li><a href="tel:+33769915734">+33 7 69 91 57 34</a></li>
+            <li><a href="mailto:Tgtproprete@gmail.com">Tgtproprete@gmail.com</a></li>
+            <li>57 Av. Carnot, 93140 Bondy</li>
+            <li style="margin-top:8px;color:rgba(255,255,255,0.3)">Île-de-France</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 TGT Propreté Soigné — Tous droits réservés</span>
+        <span>Bondy, 93140 · Île-de-France</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Intersection Observer for reveal animations
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 80);
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(r => io.observe(r));
+
+    // Form submit
+    function submitForm(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('.form-submit');
+      btn.textContent = 'Envoi en cours...';
+      btn.style.opacity = '0.7';
+      setTimeout(() => {
+        document.getElementById('form-success').style.display = 'block';
+        btn.style.display = 'none';
+        e.target.querySelectorAll('input,select,textarea').forEach(el => el.value = '');
+        document.getElementById('form-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 1200);
+    }
+  </script>
+</body>
+
+</html>
