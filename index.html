@@ -139,32 +139,51 @@
     .hero-bg {
       position: absolute;
       inset: 0;
-      overflow: hidden
+      overflow: hidden;
+
     }
 
     .hero-orb {
-      position: absolute;
       border-radius: 50%;
-      filter: blur(60px)
+      width: 20%;
+    }
+
+    .orb1 img {
+      width: 50%;
+      background-position: center;
+      background-size: contain;
+      border-radius: 50%;
+
+    }
+
+    .orb2 img {
+      width: 100%;
+      background-position: center;
+      background-size: contain;
+      border-radius: 50%;
+
     }
 
     .orb1 {
-      width: 500px;
+      width: 50%;
       height: 500px;
-      background: rgba(201, 168, 76, 0.08);
       top: -100px;
       right: -100px;
-      animation: float1 8s ease-in-out infinite
+      animation: float1 8s ease-in-out infinite;
+
+      position: relative;
+      top: 100px;
+      box-sizing: border-box;
+      margin: auto;
     }
 
     .orb2 {
       width: 300px;
       height: 300px;
-      background: rgba(201, 168, 76, 0.05);
-      bottom: 100px;
-      left: -50px;
       animation: float2 10s ease-in-out infinite
     }
+
+    .orb2 img {}
 
     .hero-grid {
       position: absolute;
@@ -1018,9 +1037,15 @@
   <!-- HERO -->z
   <section class="hero" id="home">
     <div class="hero-bg">
-      <div class="hero-grid"></div>
-      <div class="hero-orb orb1"></div>
-      <div class="hero-orb orb2"></div>
+      <div class="hero-grid">
+
+      </div>
+      <div class="hero-orb orb1">
+        <img src="Logo rond2.png" alt="">
+      </div>
+      <div class="hero-orb orb2">
+        <img src="Aspirateur.jpg" alt="">
+      </div>
     </div>
     <div class="hero-content">
       <div class="hero-badge">Île-de-France · Depuis 2018</div>
