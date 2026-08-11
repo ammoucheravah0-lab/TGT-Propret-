@@ -418,3 +418,42 @@ et note visible sur toutes les pages testées.
 - [ ] `ID_photo_M.png` : 225×225px affiché jusqu'à 500×667 → agrandissement ×3.
 - [ ] « Lire l'article » en `opacity-0` sans survol : invisible sur mobile.
 - [ ] `WhyUs.tsx` porte `id="zones"` alors que la vraie section est `zones-intervention`.
+
+### Lot 2 bis — points non bloquants soldés (2026-08-11)
+
+- [x] **Carrousel d'avis** — la largeur des cartes passe en CSS (`basis-*`
+      responsives) : le HTML du serveur est déjà dans la bonne disposition, fini
+      le saut « 1 carte pleine largeur → 3 » à l'hydratation. Le pas de
+      défilement est mesuré sur le DOM (`ResizeObserver`) au lieu de redéclarer
+      les seuils en JavaScript — plus de divergence possible entre JS et CSS.
+      Avec moins d'avis que de colonnes, les cartes s'étalent au lieu de laisser
+      un trou. Note : piloter le `transform` par variable CSS a été essayé puis
+      abandonné — Chrome ne ré-anime pas de façon fiable un `transform` dérivé
+      d'une custom property.
+- [x] **Pastilles du carrousel** : cible tactile 6×6 → 48×44 px (le point reste
+      visuellement à 6px, c'est le bouton qui l'entoure qui grandit).
+- [x] **Zones tactiles** : liens de zones du pied de page (16 → 30px),
+      communes du bandeau Zones (20 → 36px), pastilles d'arrondissements et de
+      zones liées, liens tél./mail du bandeau Contact (20 → 44px).
+- [x] **Grilles `gap-px`** : plus de cellule de fond vide — pôle à service unique
+      en pleine largeur, 3 articles sur 3 colonnes dès `md`, dernier élément
+      orphelin étendu sur la ligne.
+- [x] **« Lire l'article »** : visible sur mobile (`md:opacity-0` au lieu de
+      `opacity-0`), même correction sur les cartes de la page Paris.
+- [x] **Bandeau Zones** : grille → colonnes CSS, les départements très inégaux
+      (9 communes pour le 92, 1 pour le 78) ne laissent plus 230px de vide.
+- [x] **Portrait de Malika** : ce n'était pas une photo mais un avatar générique
+      de 225×225 étiré en 500×667, présenté comme « Portrait de Malika Tlili ».
+      Remplacé par un monogramme « MT » assumé, dans le même cadre doré.
+      → **À remplacer dès réception d'une vraie photo.**
+- [x] `ID_photo.jpg` passée en `next/image` (187 Ko servis en entier sur mobile).
+- [x] `WhyUs` portait `id="zones"` : renommé `pourquoi-nous` (une ancre `#zones`
+      atterrissait sur « Pourquoi nous choisir » au lieu du bandeau Zones).
+
+**Vérifié au navigateur** : 390 / 768 / 1440px — 0 débordement, carrousel testé
+au clic (aller/retour, bornes), monogramme, cibles tactiles mesurées.
+
+### Reste ouvert
+- [ ] Photo de Malika à demander au client.
+- [ ] Deux `<img>` bruts subsistent (carte de visite, logo de retour en haut) :
+      sans impact mesuré, remplacement par `next/image` à faire à l'occasion.
