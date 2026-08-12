@@ -6,6 +6,7 @@ import { AlertCircle, ArrowRight, CheckCircle2, Send } from "lucide-react";
 import { CONTACT } from "@/lib/constants";
 import { SERVICES } from "@/lib/services";
 import { PARIS_ARRONDISSEMENTS } from "@/lib/zones-paris";
+import { ZONES } from "@/lib/zones";
 
 const TYPE_CLIENT = [
   { value: "particulier", label: "Particulier" },
@@ -34,7 +35,8 @@ export function DevisForm() {
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget);
+    const form = e.currentTarget; // capturé AVANT l'await (sinon null après)
+    const formData = new FormData(form);
     const payload = {
       firstName: String(formData.get("firstName") ?? ""),
       lastName: String(formData.get("lastName") ?? ""),
@@ -47,6 +49,7 @@ export function DevisForm() {
       frequence: String(formData.get("frequence") ?? ""),
       message: String(formData.get("message") ?? ""),
       rgpd: formData.get("rgpd") === "on",
+      website: String(formData.get("website") ?? ""), // honeypot anti-bot
     };
 
     setStatus("submitting");
@@ -67,7 +70,7 @@ export function DevisForm() {
       }
 
       setStatus("success");
-      e.currentTarget.reset();
+      form.reset();
     } catch (err) {
       setStatus("error");
       setErrorMsg(err instanceof Error ? err.message : "Erreur inconnue");
@@ -81,6 +84,18 @@ export function DevisForm() {
       aria-describedby={status === "error" ? "devis-error" : undefined}
       noValidate
     >
+      {/* Honeypot anti-bot : invisible pour les humains, piège pour les robots */}
+      <div className="absolute left-[-9999px] top-[-9999px] h-0 w-0 overflow-hidden" aria-hidden="true">
+        <label htmlFor="website">Ne pas remplir ce champ</label>
+        <input
+          type="text"
+          id="website"
+          name="website"
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
+
       <div className="grid gap-5 md:grid-cols-2">
         <Field
           name="firstName"
@@ -151,7 +166,13 @@ export function DevisForm() {
               value: `paris-${a.number}`,
               label: `Paris ${a.number}e — ${a.district}`,
             })),
-            { value: "idf", label: "Île-de-France hors Paris" },
+            // Les pages villes pointent vers /devis?zone={slug} : sans ces options,
+            // le pré-remplissage retomberait silencieusement sur « Sélectionner ».
+            ...ZONES.map((z) => ({
+              value: z.slug,
+              label: `${z.name} (${z.postalCode})`,
+            })),
+            { value: "idf", label: "Île-de-France — autre commune" },
             { value: "autre", label: "Autre" },
           ]}
         />
@@ -174,7 +195,7 @@ export function DevisForm() {
         />
       </div>
 
-      <div className="mt-5 flex flex-col gap-2">
+      <div className="mt-5 flex min-w-0 flex-col gap-2">
         <label
           htmlFor="message"
           className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--color-navy)]"
@@ -186,7 +207,7 @@ export function DevisForm() {
           name="message"
           rows={4}
           placeholder="Décrivez votre besoin (étages, accès, contraintes, etc.)"
-          className="resize-y border-b border-gray-300 bg-transparent py-3 text-[15px] leading-relaxed outline-none transition-colors focus:border-[var(--color-gold)]"
+          className="w-full min-w-0 resize-y border-b border-gray-300 bg-transparent py-3 text-base md:text-[15px] leading-relaxed outline-none transition-colors focus:border-[var(--color-gold)]"
         />
       </div>
 
@@ -281,7 +302,10 @@ function Field({
   autoComplete,
 }: FieldProps) {
   return (
-    <div className="flex flex-col gap-2">
+    // `min-w-0` + `w-full` : un enfant de grille a une largeur minimale égale à
+    // son contenu intrinsèque. Sans cela, un champ élargit sa colonne au lieu
+    // de s'y adapter, et la grille déborde du conteneur.
+    <div className="flex min-w-0 flex-col gap-2">
       <label
         htmlFor={name}
         className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--color-navy)]"
@@ -296,7 +320,7 @@ function Field({
         placeholder={placeholder}
         required={required}
         autoComplete={autoComplete}
-        className="border-b border-gray-300 bg-transparent py-3 text-[15px] outline-none transition-colors focus:border-[var(--color-gold)]"
+        className="w-full min-w-0 border-b border-gray-300 bg-transparent py-3 text-base outline-none transition-colors focus:border-[var(--color-gold)] md:text-[15px]"
       />
     </div>
   );
@@ -318,7 +342,10 @@ function SelectField({
   options,
 }: SelectFieldProps) {
   return (
-    <div className="flex flex-col gap-2">
+    // Même contrainte que pour `Field`, en plus marqué : la largeur intrinsèque
+    // d'un `select` vaut celle de son option la plus longue (ici « Paris 10e —
+    // Gare du Nord — Gare de l'Est — Canal Saint-Martin », ~450px).
+    <div className="flex min-w-0 flex-col gap-2">
       <label
         htmlFor={name}
         className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--color-navy)]"
@@ -331,7 +358,7 @@ function SelectField({
         name={name}
         required={required}
         defaultValue={defaultValue}
-        className="appearance-none border-b border-gray-300 bg-transparent py-3 text-[15px] outline-none transition-colors focus:border-[var(--color-gold)]"
+        className="w-full min-w-0 appearance-none border-b border-gray-300 bg-transparent py-3 text-base outline-none transition-colors focus:border-[var(--color-gold)] md:text-[15px]"
       >
         {options.map((o) => (
           <option key={o.value} value={o.value} disabled={!o.value && required}>

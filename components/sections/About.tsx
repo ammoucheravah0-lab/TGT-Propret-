@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { CONTACT, MALIKA } from "@/lib/constants";
 import { Reveal } from "@/components/ui/Reveal";
 
@@ -30,7 +31,10 @@ export function About() {
         <div className="mt-6 mx-auto w-26 h-[2px] bg-gradient-to-l from-transparent via-[#c9a84c] to-transparent"></div>
       </div>
 
-      <div className="relative max-w-7xl mx-auto space-y-24">
+      {/* Gouttière explicite : sans elle, de 768px à 1279px le texte des deux
+          blocs venait se coller au bord de l'écran (au-delà, `max-w-7xl`
+          recentrait et masquait le problème). */}
+      <div className="relative mx-auto max-w-7xl space-y-24 px-4 md:px-10">
 
         {/* ---------------- SECTION RABAH AMMOUCHE ---------------- */}
         <div className="w-full">
@@ -40,22 +44,24 @@ export function About() {
 
               {/* Côté Gauche : L'image du fondateur */}
               <div className="w-full flex justify-center items-center p-4">
-                <div className="relative w-full max-w-[340px] md:max-w-[380px] aspect-square">
+                <div className="relative w-full max-w-[420px] md:max-w-[500px] aspect-[3/4]">
                   {/* Cadre doré décalé — encadrement raffiné */}
                   <span
                     className="pointer-events-none absolute -inset-3 rounded-xl border border-[#c9a84c]/40"
                     aria-hidden="true"
                   />
-                  <img
+                  <Image
                     src="/images/ID_photo.jpg"
                     alt="Portrait de Rabah Ammouche"
-                    className="relative w-full h-full object-cover object-center rounded-xl shadow-[0_25px_50px_-12px_rgba(0,0,0,0.55)] border-[2px] border-[#c9a84c]"
+                    fill
+                    sizes="(min-width: 768px) 500px, min(100vw - 4rem, 420px)"
+                    className="relative rounded-xl border-[2px] border-[#c9a84c] object-cover object-top shadow-[0_25px_50px_-12px_rgba(0,0,0,0.55)]"
                   />
                 </div>
               </div>
 
               {/* Côté Droit : Le texte de présentation */}
-              <div className="flex flex-col justify-center text-left px-4 md:px-0">
+              <div className="flex flex-col justify-center text-left">
                 <span className="text-[12px] uppercase tracking-[0.4em] text-[#c9a84c] font-medium mb-3 block">
                   Co-fondateur &amp; Gérant
                 </span>
@@ -64,7 +70,7 @@ export function About() {
                   {CONTACT.manager}
                 </h3>
 
-                <span className="text-[10px] uppercase tracking-[0.2em] text-white/45 mb-6 block font-medium">
+                <span className="text-[11px] uppercase tracking-[0.2em] text-white/70 mb-6 block font-medium">
                   {CONTACT.role}
                 </span>
 
@@ -91,7 +97,7 @@ export function About() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
 
               {/* Côté Gauche : Le texte de présentation */}
-              <div className="flex flex-col justify-center text-left px-4 md:px-0 order-2 md:order-1">
+              <div className="order-2 flex flex-col justify-center text-left md:order-1">
                 <span className="text-[12px] uppercase tracking-[0.4em] text-[#c9a84c] font-medium mb-3 block">
                   Co-fondatrice &amp; Co-gérante
                 </span>
@@ -100,7 +106,7 @@ export function About() {
                   {MALIKA.gérante}
                 </h3>
 
-                <span className="text-[10px] uppercase tracking-[0.2em] text-white/45 mb-6 block font-medium">
+                <span className="text-[11px] uppercase tracking-[0.2em] text-white/70 mb-6 block font-medium">
                   {MALIKA.role}
                 </span>
 
@@ -117,17 +123,37 @@ export function About() {
 
               {/* Côté Droit : L'image de la co-fondatrice (Effet miroir parfait) */}
               <div className="w-full flex justify-center items-center p-4 order-1 md:order-2">
-                <div className="relative w-full max-w-[340px] md:max-w-[380px] aspect-square">
+                <div className="relative w-full max-w-[420px] md:max-w-[500px] aspect-[3/4]">
                   {/* Cadre doré décalé — encadrement raffiné */}
                   <span
                     className="pointer-events-none absolute -inset-3 rounded-xl border border-[#c9a84c]/40"
                     aria-hidden="true"
                   />
-                  <img
-                    src="/images/ID_photo_M.png"
-                    alt="Portrait de Malika Tlili"
-                    className="relative w-full h-full object-cover object-center rounded-xl shadow-[0_25px_50px_-12px_rgba(0,0,0,0.55)] border-[2px] border-[#c9a84c]"
-                  />
+                  {/* Monogramme en attendant une vraie photo. L'image d'origine
+                      (`ID_photo_M.png`) était une silhouette générique de 225×225
+                      étirée jusqu'à 500×667 : à côté du portrait de Rabah, elle
+                      signalait un site inachevé. Un monogramme assumé vaut mieux
+                      qu'un faux portrait. À remplacer dès réception de la photo. */}
+                  <div
+                    className="relative flex h-full w-full items-center justify-center rounded-xl border-[2px] border-[#c9a84c] shadow-[0_25px_50px_-12px_rgba(0,0,0,0.55)]"
+                    style={{
+                      background:
+                        "linear-gradient(150deg, #16305f 0%, #0d2244 60%, #0f2749 100%)",
+                    }}
+                    role="img"
+                    aria-label={`${MALIKA.gérante}, ${MALIKA.role}`}
+                  >
+                    <span
+                      className="font-serif text-[clamp(72px,14vw,128px)] font-light leading-none tracking-[0.08em] text-[var(--color-gold)]"
+                      aria-hidden="true"
+                    >
+                      {MALIKA.initials}
+                    </span>
+                    <span
+                      className="pointer-events-none absolute inset-4 rounded-lg border border-[#c9a84c]/25"
+                      aria-hidden="true"
+                    />
+                  </div>
                 </div>
               </div>
 

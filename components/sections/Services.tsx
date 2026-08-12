@@ -9,7 +9,7 @@ import { SectionLabel } from "@/components/ui/SectionLabel";
 
 function PoleDivider({ label, tag }: { label: string; tag: string }) {
   return (
-    <div className="col-span-full flex items-center gap-6 px-1 py-4 pt-14">
+    <div className="col-span-full flex items-center gap-3 px-1 py-4 pt-14 sm:gap-6">
       <div
         className="h-px flex-1"
         style={{
@@ -18,11 +18,14 @@ function PoleDivider({ label, tag }: { label: string; tag: string }) {
         }}
         aria-hidden="true"
       />
-      <div className="flex shrink-0 flex-col items-center gap-1.5 text-center">
-        <span className="rounded-full bg-[var(--color-gold)] px-3 py-1 font-serif text-[11px] sm:text-xs font-semibold uppercase tracking-[0.25em] text-white">
+      {/* `min-w-0 shrink` sous `sm` : en `shrink-0` avec un libellé bloqué à
+          240px, le bloc dépassait la largeur disponible sous 418px et se
+          faisait couper net par l'`overflow-hidden` du cadre. */}
+      <div className="flex min-w-0 shrink flex-col items-center gap-1.5 text-center sm:shrink-0">
+        <span className="rounded-full bg-[var(--color-gold)] px-3 py-1 font-serif text-[11px] font-semibold uppercase tracking-[0.25em] text-[var(--color-navy)] sm:text-xs">
           {tag}
         </span>
-        <span className="font-serif text-2xl sm:text-4xl font-semibold text-[var(--color-navy)] max-w-[240px] sm:max-w-none text-center leading-tight">
+        <span className="max-w-full text-center font-serif text-xl font-semibold leading-tight text-[var(--color-navy)] sm:max-w-none sm:text-4xl">
           {label}
         </span>
       </div>
@@ -38,7 +41,11 @@ function PoleDivider({ label, tag }: { label: string; tag: string }) {
   );
 }
 
-// ─── Carte service (Révélation naturelle du fond Doré au Hover) ───────────────
+// ─── Carte service — photo en fond, texte par-dessus, pleine largeur ─────────
+// La carte occupe 100 % de la largeur : la photo couvre tout le fond, un
+// dégradé blanc remonte du bas et le contenu se pose dessus. Le texte est
+// borné en largeur pour rester lisible sur grand écran.
+// Seule la première image de la section est préchargée — le reste est en lazy.
 
 function ServiceCard({
   slug,
@@ -47,6 +54,7 @@ function ServiceCard({
   Icon,
   title,
   shortDesc,
+  priority = false,
   isSpecialty = false,
 }: {
   slug: string;
@@ -55,104 +63,79 @@ function ServiceCard({
   Icon: React.ComponentType<{ size?: number; strokeWidth?: number }>;
   title: string;
   shortDesc: string;
+  priority?: boolean;
   isSpecialty?: boolean;
 }) {
   return (
-    /* 
-      Le parent reste fixe au sol avec le fond doré. 
-      On enlève 'overflow-hidden' pour permettre à la carte de déborder en haut au hover.
-    */
     <Link
       href={`/services/${slug}`}
-      className="group relative block min-h-[350px] bg-[var(--color-gold)]"
+      className="group relative flex min-h-[340px] w-full flex-col justify-end overflow-hidden bg-white p-7 transition-all duration-500 ease-out hover:shadow-[0_20px_40px_rgba(13,34,68,0.15)] sm:min-h-[380px] sm:p-9 lg:min-h-[420px] lg:p-12"
     >
-      {/* 
-        Ce bloc contient l'image, le dégradé et le texte.
-        Au hover, tout ce bloc monte de 8px (hover:-translate-y-2), 
-        donc l'image se décale aussi vers le haut en sortant légèrement du cadre initial.
-      */}
-      <div className="absolute inset-0 z-10 flex h-full w-full flex-col justify-end bg-white p-8 transition-transform duration-500 ease-out group-hover:-translate-y-2 group-hover:shadow-[0_20px_40px_rgba(13,34,68,0.15)] overflow-hidden">
+      {/* Photo de fond — couvre toute la carte */}
+      <Image
+        src={bgImage}
+        alt={title}
+        fill
+        sizes="(min-width: 1280px) 1200px, 100vw"
+        className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+        priority={priority}
+      />
 
-        {/* Image de fond (Nette à 100%) */}
-        <div className="absolute inset-0 z-0 h-full w-full block">
-          <Image
-            src={bgImage || "/images/placeholder.jpg"}
-            alt={title}
-            fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
-            priority
-          />
+      {/* Dégradé blanc : lisibilité du texte posé dessus */}
+      <div
+        className="absolute inset-0 bg-gradient-to-t from-white via-white/85 via-50% to-transparent opacity-95"
+        aria-hidden="true"
+      />
+
+      {/* Contenu */}
+      <div className="relative flex max-w-3xl flex-col gap-6">
+        <div className="flex items-center gap-4">
+          <span
+            className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-white text-[var(--color-navy)] shadow-md transition-all duration-300 group-hover:scale-110 group-hover:bg-[var(--color-gold)] group-hover:text-white"
+            aria-hidden="true"
+          >
+            <Icon size={26} strokeWidth={1.5} />
+          </span>
+
+          <span
+            className="font-serif text-5xl font-light leading-none text-[var(--color-navy)] opacity-20 transition-all duration-300 group-hover:text-[var(--color-gold)] group-hover:opacity-100"
+            aria-hidden="true"
+          >
+            {num}
+          </span>
         </div>
 
-        {/* Overlay dégradé blanc */}
-        <div className="absolute inset-0 z-10 bg-gradient-to-t from-white via-white/85 via-50% to-transparent opacity-95" />
+        <div>
+          <div className="mb-3 flex flex-wrap items-center gap-2">
+            <h3 className="font-serif text-2xl font-bold leading-snug text-[var(--color-navy)] lg:text-3xl">
+              {title}
+            </h3>
 
-        {/* Contenu (Texte et Icônes) */}
-        <div className="relative z-20 flex flex-col h-full justify-between">
-
-          {/* Haut de carte */}
-          <div className="flex items-start justify-between mb-10">
-            <span
-              className="flex h-14 w-14 items-center justify-center rounded-full bg-white text-[var(--color-navy)] shadow-md transition-all duration-300 group-hover:scale-110 group-hover:bg-[var(--color-gold)] group-hover:text-white"
-              aria-hidden="true"
-            >
-              <Icon size={26} strokeWidth={1.5} />
-            </span>
-
-            <span
-              className="font-serif text-5xl font-light leading-none text-[var(--color-navy)] opacity-20 transition-all duration-300 group-hover:opacity-100 group-hover:text-[var(--color-gold)]"
-              aria-hidden="true"
-            >
-              {num}
-            </span>
+            {isSpecialty && (
+              <span
+                className="inline-flex items-center gap-1 rounded-full bg-[var(--color-gold)] px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.15em] text-[var(--color-navy)]"
+                title="Notre spécialité"
+              >
+                <Star size={9} fill="currentColor" strokeWidth={0} aria-hidden="true" />
+                Spécialité
+              </span>
+            )}
           </div>
 
-          {/* Bas de carte */}
-          <div>
-            <div className="mb-3 flex flex-wrap items-center gap-2">
-              <h3 className="font-serif text-2xl font-bold leading-snug text-[var(--color-navy)]">
-                {title}
-              </h3>
+          {/* Texte en navy plutôt qu'en `--color-muted` : posé sur une photo,
+              le gris n'offrait plus le contraste minimum une fois le voile
+              blanc translucide (les 16 photos n'ont pas la même clarté). */}
+          <p className="text-sm font-medium leading-relaxed text-[var(--color-navy)]/80 transition-colors duration-300 group-hover:text-[var(--color-navy)] lg:text-[15px]">
+            {shortDesc}
+          </p>
 
-              {isSpecialty && (
-                <span
-                  className="inline-flex items-center gap-1 rounded-full bg-[var(--color-gold)] px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.15em] text-white"
-                  title="Notre spécialité"
-                >
-                  <Star size={9} fill="white" strokeWidth={0} aria-hidden="true" />
-                  Spécialité
-                </span>
-              )}
-            </div>
-
-            <p className="text-sm leading-relaxed text-[var(--color-muted)] group-hover:text-[var(--color-navy)] transition-colors duration-300 line-clamp-3 font-medium">
-              {shortDesc}
-            </p>
-
-            <span className="mt-4 inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold)] transform translate-x-[-5px] opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100">
-              En savoir plus <ArrowRight size={12} aria-hidden="true" />
-            </span>
-          </div>
-
+          <span className="mt-5 inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold)] transition-all duration-300 md:-translate-x-[5px] md:opacity-0 md:group-hover:translate-x-0 md:group-hover:opacity-100">
+            En savoir plus <ArrowRight size={12} aria-hidden="true" />
+          </span>
         </div>
       </div>
     </Link>
   );
-}
-
-function GhostCard() {
-  return (
-    <div
-      className="hidden bg-white/40 sm:block"
-      aria-hidden="true"
-    />
-  );
-}
-
-function getGhostCount(itemCount: number, cols: number): number {
-  const remainder = itemCount % cols;
-  return remainder === 0 ? 0 : cols - remainder;
 }
 
 // ─── Section principale ────────────────────────────────────────────────────────
@@ -184,13 +167,15 @@ export function Services() {
           <SectionLabel centered>Ce Que Nous Faisons</SectionLabel>
 
           <h2 className="font-serif text-[clamp(40px,5vw,68px)] font-semibold leading-none tracking-tight text-[var(--color-navy)]">
-            Nos{" "}
-            <em className="italic text-[var(--color-gold)]">Services</em>
+            Nos services de{" "}
+            <em className="italic text-[var(--color-gold)]">
+              nettoyage professionnel
+            </em>
           </h2>
 
           <p className="mt-3 text-[15px] leading-relaxed text-[var(--color-muted)]">
             De votre salon à votre chantier, nous couvrons l&apos;ensemble de
-            vos besoins en nettoyage professionnel.
+            vos besoins en nettoyage à Paris et en Île-de-France.
           </p>
 
           <div
@@ -209,63 +194,41 @@ export function Services() {
             className="border border-[#c9a84c]/30 rounded-lg overflow-hidden shadow-xl"
             style={{ background: "#c9a84c" }}
           >
-            {servicesByPole.map(({ pole, items }) => {
-              const cols =
-                items.length === 1
-                  ? 1
-                  : items.length === 2
-                    ? 2
-                    : items.length === 3
-                      ? 3
-                      : 4;
-
-              const effectiveCols =
-                items.length === 6
-                  ? 3
-                  : items.length === 5
-                    ? 3
-                    : cols;
-
-              const ghosts = getGhostCount(items.length, effectiveCols);
-
-              const gridClass =
-                effectiveCols === 1
-                  ? "grid gap-px sm:grid-cols-1"
-                  : effectiveCols === 2
-                    ? "grid gap-px sm:grid-cols-2"
-                    : effectiveCols === 3
-                      ? "grid gap-px sm:grid-cols-2 lg:grid-cols-3"
-                      : "grid gap-px sm:grid-cols-2 lg:grid-cols-4";
-
-              return (
-                <div key={pole.id} className="bg-[var(--color-light)]">
-                  <div className="col-span-full px-6">
-                    <PoleDivider label={pole.label} tag={pole.tag} />
-                  </div>
-
-                  <div className={gridClass}>
-                    {items.map(({ slug, num, bgImage, Icon, title, shortDesc }) => (
-                      <ServiceCard
-                        key={slug}
-                        slug={slug}
-                        num={num}
-                        bgImage={bgImage}
-                        Icon={Icon}
-                        title={title}
-                        shortDesc={shortDesc}
-                        isSpecialty={num === "01"}
-                      />
-                    ))}
-
-                    {/* Cartes fantômes */}
-                    {Array.from({ length: ghosts }).map((_, i) => (
-                      <GhostCard key={`ghost-${pole.id}-${i}`} />
-                    ))}
-                  </div>
+            {servicesByPole.map(({ pole, items }, poleIndex) => (
+              <div key={pole.id} className="bg-[var(--color-light)]">
+                <div className="px-6">
+                  <PoleDivider label={pole.label} tag={pole.tag} />
                 </div>
-              );
-            })}
+
+                {/* Une prestation par ligne, sur toute la largeur */}
+                <div className="grid grid-cols-1 gap-px">
+                  {items.map(({ slug, num, bgImage, Icon, title, shortDesc }, i) => (
+                    <ServiceCard
+                      key={slug}
+                      slug={slug}
+                      num={num}
+                      bgImage={bgImage}
+                      Icon={Icon}
+                      title={title}
+                      shortDesc={shortDesc}
+                      priority={poleIndex === 0 && i === 0}
+                      isSpecialty={num === "01"}
+                    />
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
+        </Reveal>
+
+        <Reveal className="mt-12 text-center">
+          <Link
+            href="/services"
+            className="inline-flex items-center gap-2 border border-[var(--color-navy)]/20 bg-white px-7 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-navy)] transition-all hover:-translate-y-0.5 hover:border-[var(--color-gold)] hover:text-[var(--color-gold)]"
+          >
+            Voir le détail de nos prestations
+            <ArrowRight size={14} aria-hidden="true" />
+          </Link>
         </Reveal>
 
       </div>

@@ -13,11 +13,44 @@ export const SITE = {
   tagline: "Entreprise de Nettoyage Paris & Île-de-France",
   description:
     "Entreprise de nettoyage professionnel à Paris et en Île-de-France. Bureaux, copropriétés, fin de chantier, vitres, canapés, tapis. Devis gratuit sous 24h, sans engagement.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://tgt-proprete-paris.fr",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://nettoyagesidf.fr",
   locale: "fr_FR",
   foundingYear: 2018,
-  yearsOfExperience: 6,
 } as const;
+
+/**
+ * Années d'expérience, dérivées de `SITE.foundingYear`.
+ * Source unique : évite les « 6+ ans » et « 8+ années » divergents d'une page à l'autre.
+ */
+export function getYearsOfExperience(): number {
+  return new Date().getFullYear() - SITE.foundingYear;
+}
+
+/**
+ * Avis Google Business Profile.
+ *
+ * Ces valeurs alimentent l'`aggregateRating` du JSON-LD `CleaningService` et
+ * déclenchent l'affichage des étoiles dans les résultats de recherche.
+ *
+ * Elles doivent correspondre **exactement** à la fiche Google Business Profile :
+ * Google sanctionne les notes agrégées qui ne se retrouvent nulle part. Les
+ * `TESTIMONIALS` plus bas sont des témoignages éditoriaux, jamais balisés en
+ * `Review` pour cette raison.
+ *
+ * → À mettre à jour à chaque palier d'avis (relevé du 28/07/2026 : 5,0 sur 11 avis).
+ * Passer la constante à `null` retire proprement l'`aggregateRating` du site.
+ */
+export type GoogleReviews = {
+  ratingValue: number;
+  reviewCount: number;
+  url: string;
+};
+
+export const GOOGLE_REVIEWS: GoogleReviews | null = {
+  ratingValue: 5.0,
+  reviewCount: 11,
+  url: "https://www.google.com/maps/place/TGT+propret%C3%A9/@48.8999832,2.4817104,17z/data=!3m1!4b1!4m6!3m5!1s0x47e61332850736f1:0x6906ec8716523c4f!8m2!3d48.8999832!4d2.4817104",
+};
 
 export const MALIKA = {
   gérante: "Malika Tlili",
@@ -60,16 +93,16 @@ export const IDF_DEPARTMENTS: readonly { code: string; name: string }[] = [
 
 export const NAV_LINKS = [
   { label: "Notre équipe", href: "/#about" },
-  { label: "Prestations & Tarifs", href: "/#services" },
+  { label: "Prestations & Tarifs", href: "/services" },
+  { label: "Zones", href: "/zones" },
   { label: "Réalisations", href: "/#realisations" },
   { label: "Avis", href: "/#avis" },
   { label: "Conseils", href: "/#blog" },
-  { label: "Paris", href: "/zones/paris" },
   { label: "Contact", href: "/devis" },
 ] as const;
 
 export const STATS: readonly { num: string; label: string }[] = [
-  { num: "8+", label: "Années d'expérience" },
+  { num: `${getYearsOfExperience()}+`, label: "Années d'expérience" },
   { num: "750+", label: "Clients satisfaits" },
   { num: "800+", label: "Interventions réalisées" },
   { num: "100%", label: "Satisfaction garantie" },
@@ -105,7 +138,7 @@ export const ENGAGEMENTS: readonly Engagement[] = [
   {
     Icon: Award,
     title: "Satisfaction garantie",
-    desc: "8+ années d'expérience, des dizaines de clients fidèles, une exigence constante.",
+    desc: `${getYearsOfExperience()}+ années d'expérience, des dizaines de clients fidèles, une exigence constante.`,
   },
 ];
 

@@ -26,7 +26,7 @@ export function BlogPreview() {
               Conseils &amp;{" "}
               <em className="italic text-[var(--color-gold)]">retours d&apos;expérience</em>
             </h2>
-            <div className=" items-center mt-6 w-74 h-[2px] bg-gradient-to-r from-transparent via-[#c9a84c] to-transparent "></div>
+            <div className="mt-6 h-[2px] w-full max-w-[296px] bg-gradient-to-r from-transparent via-[#c9a84c] to-transparent"></div>
             <p className="text-[15px] leading-relaxed text-[var(--color-muted)]">
               Prix, fréquences, méthodes, anecdotes — on partage tout ce
               qu&apos;on a appris sur le nettoyage professionnel en
@@ -41,7 +41,7 @@ export function BlogPreview() {
           </Link>
         </Reveal>
 
-        <Reveal className="mt-12 grid gap-px bg-[rgba(13,34,68,0.08)] sm:grid-cols-2 lg:grid-cols-3 md:mt-16">
+        <Reveal className="mt-12 grid gap-px bg-[rgba(13,34,68,0.08)] sm:grid-cols-2 md:mt-16 md:grid-cols-3">
           {articles.map(({ slug, title, excerpt, category, Icon, publishedAt, readingTime }) => (
             <Link
               key={slug}

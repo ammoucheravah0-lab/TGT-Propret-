@@ -28,7 +28,7 @@ const REASONS = [
 export function WhyUs() {
   return (
     <section
-      id="zones"
+      id="pourquoi-nous"
       className="bg-[var(--color-navy)] px-5 py-20 text-white md:px-10 md:py-25"
     >
       <div className="container-tgt">
@@ -37,8 +37,8 @@ export function WhyUs() {
 
           <div className="flex flex-col items-center">
             <h2 className="font-serif text-[clamp(36px,5vw,60px)] font-light leading-none text-white">
-              L&apos;<em className="italic text-[#c9a84c]">excellence</em>{" "}
-              au quotidien
+              Pourquoi choisir TGT Propreté{" "}
+              <em className="italic text-[#c9a84c]">en Île-de-France</em>
             </h2>
 
             {/* Trait de séparation horizontal en dégradé symétrique (Prestige) */}
