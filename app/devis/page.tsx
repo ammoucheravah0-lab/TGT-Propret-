@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
@@ -174,10 +175,13 @@ export default function DevisPage() {
           
           {/* Conteneur de la Carte de Visite animée */}
           <div className="relative group overflow-hidden rounded-xl border border-white/10 shadow-2xl transition-all duration-500 hover:shadow-[var(--color-gold)]/10 hover:border-[var(--color-gold)]/30">
-            <img 
-              src="/images/Carte_de_visite.jpg" 
-              alt="Notre carte de visite" 
-              className="w-full h-auto object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            <Image
+              src="/images/Carte_de_visite.jpg"
+              alt="Notre carte de visite"
+              width={1050}
+              height={600}
+              sizes="(min-width: 1024px) 340px, calc(100vw - 4rem)"
+              className="h-auto w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
           </div>

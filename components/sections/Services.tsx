@@ -45,7 +45,9 @@ function PoleDivider({ label, tag }: { label: string; tag: string }) {
 // La carte occupe 100 % de la largeur : la photo couvre tout le fond, un
 // dégradé blanc remonte du bas et le contenu se pose dessus. Le texte est
 // borné en largeur pour rester lisible sur grand écran.
-// Seule la première image de la section est préchargée — le reste est en lazy.
+// Toutes les photos sont en chargement différé : la section commence à ~2 écrans
+// sous la ligne de flottaison, un préchargement y volerait de la bande passante
+// au visuel du hero (élément LCP).
 
 function ServiceCard({
   slug,
@@ -54,7 +56,6 @@ function ServiceCard({
   Icon,
   title,
   shortDesc,
-  priority = false,
   isSpecialty = false,
 }: {
   slug: string;
@@ -63,7 +64,6 @@ function ServiceCard({
   Icon: React.ComponentType<{ size?: number; strokeWidth?: number }>;
   title: string;
   shortDesc: string;
-  priority?: boolean;
   isSpecialty?: boolean;
 }) {
   return (
@@ -78,7 +78,6 @@ function ServiceCard({
         fill
         sizes="(min-width: 1280px) 1200px, 100vw"
         className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
-        priority={priority}
       />
 
       {/* Dégradé blanc : lisibilité du texte posé dessus */}
@@ -211,7 +210,6 @@ export function Services() {
                       Icon={Icon}
                       title={title}
                       shortDesc={shortDesc}
-                      priority={poleIndex === 0 && i === 0}
                       isSpecialty={num === "01"}
                     />
                   ))}

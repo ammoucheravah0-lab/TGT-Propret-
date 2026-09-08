@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState, type FormEvent } from "react";
 import {
   AlertCircle,
@@ -138,12 +139,13 @@ export function CandidatureForm() {
               ))}
             </ul>
             <div className="rounded-[10px] bg-[var(--color-navy)] p-6 text-white">
-              {/* eslint-disable-next-line @next/next/no-img-element -- visuel décoratif, remplacement par next/image à prévoir */}
-              <img
+              <Image
                 src="/images/Carte_de_visite.jpg"
                 alt="Carte de visite — Rabah Ammouche"
+                width={1050}
+                height={600}
+                sizes="(min-width: 1024px) 460px, calc(100vw - 5rem)"
                 className="h-auto w-full"
-                loading="lazy"
               />
             </div>
           </div>
