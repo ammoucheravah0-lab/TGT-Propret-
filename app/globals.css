@@ -5,6 +5,11 @@
   --color-navy-2: #152d5a;
   --color-gold: #c9a84c;
   --color-gold-2: #e8c870;
+  /* Le doré de marque (#c9a84c) ne donne que 2,3:1 sur blanc : illisible en
+     petit corps. Cette déclinaison plus profonde tient 5,5:1 sur blanc et
+     4,9:1 sur crème, tout en restant du doré. Réservée au TEXTE sur fond
+     clair ; bordures, aplats et grands titres gardent le doré de marque. */
+  --color-gold-text: #7f6614;
   --color-cream: #f5f0e8;
   --color-light: #fdfcf9;
   --color-ink: #1a1a2e;
@@ -120,10 +125,16 @@
 }
 
 /* Hero animations */
+/* L'entrée du hero part d'une opacité NON nulle et d'une durée courte.
+   Chrome ignore les éléments à `opacity: 0` pour le LCP : le paragraphe
+   d'accroche n'était donc « peint » qu'à la fin de son animation, et le LCP
+   mobile grimpait à 4 s pour un texte pourtant présent dans le HTML dès la
+   première réponse. Le mouvement reste perceptible, le texte est mesurable
+   dès la première image. */
 @keyframes fade-up {
   from {
-    opacity: 0;
-    transform: translateY(30px);
+    opacity: 0.25;
+    transform: translateY(18px);
   }
   to {
     opacity: 1;
@@ -161,16 +172,32 @@
 }
 
 .animate-fade-up {
-  animation: fade-up 1s both;
+  animation: fade-up 0.6s ease-out both;
 }
 .animate-fade-up-1 {
-  animation: fade-up 1s 0.15s both;
+  animation: fade-up 0.6s 0.06s ease-out both;
+}
+/* Le titre et l'accroche du hero portent le LCP : ils glissent sans jamais
+   descendre en opacité, pour être « peints » dès la première image. */
+.animate-slide-up {
+  animation: slide-up 0.6s ease-out both;
+}
+.animate-slide-up-1 {
+  animation: slide-up 0.6s 0.08s ease-out both;
+}
+@keyframes slide-up {
+  from {
+    transform: translateY(16px);
+  }
+  to {
+    transform: translateY(0);
+  }
 }
 .animate-fade-up-2 {
-  animation: fade-up 1s 0.3s both;
+  animation: fade-up 0.6s 0.12s ease-out both;
 }
 .animate-fade-up-3 {
-  animation: fade-up 1s 0.45s both;
+  animation: fade-up 0.6s 0.18s ease-out both;
 }
 .animate-float-1 {
   animation: float-1 8s ease-in-out infinite;

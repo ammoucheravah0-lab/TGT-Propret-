@@ -61,7 +61,7 @@ export function Realisations() {
                 />
                 <figcaption className="flex flex-col gap-1 px-6 py-5 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
                   <div className="min-w-0">
-                    <span className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[var(--color-gold)]">
+                    <span className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[var(--color-gold-text)]">
                       {r.category}
                     </span>
                     <h3 className="mt-1 font-serif text-xl font-semibold text-[var(--color-navy)]">

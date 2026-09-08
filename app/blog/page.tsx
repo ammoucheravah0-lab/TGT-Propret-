@@ -32,7 +32,7 @@ export default function BlogIndexPage() {
       <main id="main" className="bg-[var(--color-light)]">
         <header className="bg-[var(--color-navy)] px-5 pb-16 pt-32 text-white md:px-10 md:pb-24 md:pt-36">
           <div className="container-tgt">
-            <SectionLabel>Le journal TGT Propreté</SectionLabel>
+            <SectionLabel onDark>Le journal TGT Propreté</SectionLabel>
             <h1 className="mt-3 font-serif text-[clamp(40px,6vw,72px)] font-light leading-tight">
               Conseils &amp; retours{" "}
               <em className="italic text-[var(--color-gold)]">d&apos;expérience</em>
@@ -61,7 +61,7 @@ export default function BlogIndexPage() {
                     >
                       <Icon size={22} strokeWidth={1.5} />
                     </span>
-                    <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold)]">
+                    <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold-text)]">
                       {category}
                     </span>
                   </div>
@@ -84,7 +84,7 @@ export default function BlogIndexPage() {
                     </span>
                   </div>
 
-                  <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold)] transition-opacity md:opacity-0 md:group-hover:opacity-100">
+                  <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold-text)] transition-opacity md:opacity-0 md:group-hover:opacity-100">
                     Lire l&apos;article <ArrowRight size={12} aria-hidden="true" />
                   </span>
                 </Link>

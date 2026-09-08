@@ -91,7 +91,7 @@ function AvatarInitials({ name }: { name: string }) {
     .slice(0, 2)
     .toUpperCase();
   return (
-    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[var(--color-navy)] font-serif text-sm font-semibold text-[var(--color-gold)]">
+    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[var(--color-navy)] font-serif text-sm font-semibold text-[var(--color-gold-text)]">
       {initials}
     </span>
   );
@@ -203,7 +203,7 @@ function GoldDivider({ label, sub }: { label: ReactNode; sub?: string }) {
         aria-hidden="true"
       />
       {sub && (
-        <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[var(--color-gold)]">
+        <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[var(--color-gold-text)]">
           {sub}
         </p>
       )}

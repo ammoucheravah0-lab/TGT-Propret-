@@ -82,9 +82,9 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="mb-5 text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold)]">
+            <h2 className="mb-5 text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold)]">
               Services
-            </h4>
+            </h2>
             <Link
               href="/services"
               className="mb-3 inline-flex min-h-11 items-center text-sm font-semibold text-white/80 transition-colors hover:text-[var(--color-gold)]"
@@ -103,9 +103,9 @@ export function Footer() {
                 </li>
               ))}
             </ul>
-            <h4 className="mb-3 mt-6 text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold)]">
+            <h2 className="mb-3 mt-6 text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold)]">
               Ressources
-            </h4>
+            </h2>
             <ul className="space-y-2 text-sm text-white/75">
               <li>
                 <Link
@@ -127,9 +127,9 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="mb-5 text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold)]">
+            <h2 className="mb-5 text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold)]">
               Paris
-            </h4>
+            </h2>
             <Link
               href="/zones/paris"
               className="mb-3 inline-flex min-h-11 items-center text-sm font-semibold text-white/80 transition-colors hover:text-[var(--color-gold)]"
@@ -152,9 +152,9 @@ export function Footer() {
                 ))}
             </ul>
 
-            <h4 className="mb-3 mt-6 text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold)]">
+            <h2 className="mb-3 mt-6 text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold)]">
               Île-de-France
-            </h4>
+            </h2>
             <Link
               href="/zones"
               className="mb-3 inline-flex min-h-11 items-center text-sm font-semibold text-white/80 transition-colors hover:text-[var(--color-gold)]"
@@ -180,9 +180,9 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="mb-5 text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold)]">
+            <h2 className="mb-5 text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold)]">
               Contact
-            </h4>
+            </h2>
             <ul className="space-y-3 text-sm text-white/75">
               {CONTACT.phones.map((p) => (
                 <li key={p.tel}>
@@ -218,9 +218,9 @@ export function Footer() {
                 </span>
               </li>
             </ul>
-            <h4 className="mb-3 mt-6 text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold)]">
+            <h2 className="mb-3 mt-6 text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold)]">
               Légal
-            </h4>
+            </h2>
             <ul className="space-y-2 text-sm text-white/75">
               <li>
                 <Link

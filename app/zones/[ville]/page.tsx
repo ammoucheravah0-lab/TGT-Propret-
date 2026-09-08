@@ -80,7 +80,7 @@ export default async function ZonePage({
               <span className="text-white">{zone.name}</span>
             </nav>
 
-            <SectionLabel>
+            <SectionLabel onDark>
               {zone.department} · {zone.postalCode}
             </SectionLabel>
             <h1 className="mt-3 font-serif text-[clamp(36px,5.5vw,68px)] font-light leading-[1.05]">

@@ -60,7 +60,7 @@ export default function ZonesHubPage() {
               <span className="text-white">Zones</span>
             </nav>
 
-            <SectionLabel>
+            <SectionLabel onDark>
               {PARIS_ARRONDISSEMENTS.length} arrondissements ·{" "}
               {ZONES.length}{" "}
               communes

@@ -97,7 +97,7 @@ export default function ParisHubPage() {
               <span className="text-white/80">Paris</span>
             </nav>
 
-            <SectionLabel>Zone d&apos;intervention principale</SectionLabel>
+            <SectionLabel onDark>Zone d&apos;intervention principale</SectionLabel>
 
             <h1 className="mt-4 font-serif text-[clamp(44px,6.5vw,84px)] font-light leading-[1.01]">
               Entreprise de nettoyage{" "}
@@ -475,7 +475,7 @@ export default function ParisHubPage() {
                   key={t.name}
                   className="flex flex-col gap-4 border-t-[3px] border-[var(--color-gold)] bg-white p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_48px_rgba(13,34,68,0.1)]"
                 >
-                  <div className="flex gap-1" aria-label={`${t.rating}/5`}>
+                  <div className="flex gap-1" role="img" aria-label={`${t.rating} étoiles sur 5`}>
                     {Array.from({ length: 5 }, (_, i) => (
                       <Star
                         key={i}

@@ -66,7 +66,7 @@ export default function ServicesHubPage() {
               <span className="text-white">Services</span>
             </nav>
 
-            <SectionLabel>
+            <SectionLabel onDark>
               {SERVICES.length}{" "}
               prestations · Paris &amp; Île-de-France
             </SectionLabel>
@@ -145,7 +145,7 @@ export default function ServicesHubPage() {
                             {s.shortDesc}
                           </p>
                           {s.priceRange && (
-                            <span className="mt-auto pt-3 text-[11px] font-semibold uppercase tracking-[0.15em] text-[var(--color-gold)]">
+                            <span className="mt-auto pt-3 text-[11px] font-semibold uppercase tracking-[0.15em] text-[var(--color-gold-text)]">
                               {s.priceRange}
                             </span>
                           )}

@@ -38,7 +38,7 @@ export function FaqSection({
           </p>
         )}
 
-        <dl className="mt-10 divide-y divide-gray-200 border-y border-gray-200">
+        <div className="mt-10 divide-y divide-gray-200 border-y border-gray-200">
           {items.map((item) => (
             <details
               key={item.q}
@@ -46,7 +46,7 @@ export function FaqSection({
               name="tgt-faq"
             >
               <summary className="flex cursor-pointer list-none items-start justify-between gap-4 font-serif text-lg font-semibold text-[var(--color-navy)] md:text-xl">
-                <dt>{item.q}</dt>
+                <span>{item.q}</span>
                 <span
                   aria-hidden="true"
                   className="mt-1 text-2xl leading-none text-[var(--color-gold)] transition-transform group-open:rotate-45"
@@ -54,12 +54,12 @@ export function FaqSection({
                   +
                 </span>
               </summary>
-              <dd className="mt-3 text-[15px] leading-relaxed text-[var(--color-muted)]">
+              <div className="mt-3 text-[15px] leading-relaxed text-[var(--color-muted)]">
                 {item.a}
-              </dd>
+              </div>
             </details>
           ))}
-        </dl>
+        </div>
       </div>
 
       <script

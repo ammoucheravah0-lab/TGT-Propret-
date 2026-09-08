@@ -128,7 +128,7 @@ function ServiceCard({
             {shortDesc}
           </p>
 
-          <span className="mt-5 inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold)] transition-all duration-300 md:-translate-x-[5px] md:opacity-0 md:group-hover:translate-x-0 md:group-hover:opacity-100">
+          <span className="mt-5 inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold-text)] transition-all duration-300 md:-translate-x-[5px] md:opacity-0 md:group-hover:translate-x-0 md:group-hover:opacity-100">
             En savoir plus <ArrowRight size={12} aria-hidden="true" />
           </span>
         </div>
@@ -222,7 +222,7 @@ export function Services() {
         <Reveal className="mt-12 text-center">
           <Link
             href="/services"
-            className="inline-flex items-center gap-2 border border-[var(--color-navy)]/20 bg-white px-7 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-navy)] transition-all hover:-translate-y-0.5 hover:border-[var(--color-gold)] hover:text-[var(--color-gold)]"
+            className="inline-flex items-center gap-2 border border-[var(--color-navy)]/20 bg-white px-7 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-navy)] transition-all hover:-translate-y-0.5 hover:border-[var(--color-gold)] hover:text-[var(--color-gold-text)]"
           >
             Voir le détail de nos prestations
             <ArrowRight size={14} aria-hidden="true" />

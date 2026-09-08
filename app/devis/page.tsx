@@ -60,7 +60,7 @@ export default function DevisPage() {
               <span className="text-white">Devis</span>
             </nav>
 
-            <SectionLabel>Devis gratuit</SectionLabel>
+            <SectionLabel onDark>Devis gratuit</SectionLabel>
             <h1 className="mt-3 font-serif text-[clamp(36px,5.5vw,68px)] font-light leading-[1.05]">
               Devis gratuit pour votre{" "}
               <em className="italic text-[var(--color-gold)]">nettoyage à Paris</em>
@@ -156,7 +156,7 @@ export default function DevisPage() {
                     href={`tel:${p.tel}`}
                     className="group inline-flex items-center gap-3 transition-all duration-300 hover:text-[var(--color-gold)] hover:translate-x-1"
                   >
-                    <Phone size={15} aria-hidden="true" className="text-[var(--color-gold)] transition-transform group-hover:scale-110" /> 
+                    <Phone size={15} aria-hidden="true" className="text-[var(--color-gold-text)] transition-transform group-hover:scale-110" /> 
                     <span>{p.label}</span>
                   </a>
                 </li>
@@ -166,7 +166,7 @@ export default function DevisPage() {
                   href={`mailto:${CONTACT.email}`}
                   className="group inline-flex items-center gap-3 transition-all duration-300 hover:text-[var(--color-gold)] hover:translate-x-1"
                 >
-                  <Mail size={15} aria-hidden="true" className="text-[var(--color-gold)] transition-transform group-hover:scale-110" /> 
+                  <Mail size={15} aria-hidden="true" className="text-[var(--color-gold-text)] transition-transform group-hover:scale-110" /> 
                   <span className="break-all">{CONTACT.email}</span>
                 </a>
               </li>

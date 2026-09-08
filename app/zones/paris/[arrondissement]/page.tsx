@@ -82,7 +82,7 @@ export default async function ArrondissementPage({
               <span className="text-white">{arr.name}</span>
             </nav>
 
-            <SectionLabel>
+            <SectionLabel onDark>
               Paris {arr.number}
               <sup>e</sup> · {arr.postalCode}
             </SectionLabel>

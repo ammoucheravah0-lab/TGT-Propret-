@@ -35,7 +35,7 @@ export function BlogPreview() {
           </div>
           <Link
             href="/blog"
-            className="inline-flex items-center gap-2 border border-[var(--color-navy)]/15 bg-white px-6 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-navy)] transition-all hover:border-[var(--color-gold)] hover:text-[var(--color-gold)]"
+            className="inline-flex items-center gap-2 border border-[var(--color-navy)]/15 bg-white px-6 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-navy)] transition-all hover:border-[var(--color-gold)] hover:text-[var(--color-gold-text)]"
           >
             Tous les articles <ArrowRight size={14} aria-hidden="true" />
           </Link>
@@ -55,7 +55,7 @@ export function BlogPreview() {
                 >
                   <Icon size={20} strokeWidth={1.5} />
                 </span>
-                <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold)]">
+                <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold-text)]">
                   {category}
                 </span>
               </div>

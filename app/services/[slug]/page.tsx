@@ -119,7 +119,7 @@ export default async function ServicePage({
               <span className="text-white">{service.title}</span>
             </nav>
 
-            <SectionLabel>Service {service.num} · Paris &amp; IDF</SectionLabel>
+            <SectionLabel onDark>Service {service.num} · Paris &amp; IDF</SectionLabel>
             <h1 className="mt-3 font-serif text-[clamp(36px,5.5vw,72px)] font-light leading-tight text-white">
               {service.h1 ? (
                 <>
