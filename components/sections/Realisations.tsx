@@ -57,9 +57,10 @@ export function Realisations() {
                   beforeAlt={`${r.title} — avant intervention`}
                   afterAlt={`${r.title} — après intervention TGT Propreté`}
                   ratio={r.ratio ?? "4 / 3"}
+                  className="max-h-[58vh] sm:max-h-[420px] lg:max-h-[460px]"
                 />
-                <figcaption className="flex items-start justify-between gap-4 px-6 py-5">
-                  <div>
+                <figcaption className="flex flex-col gap-1 px-6 py-5 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
+                  <div className="min-w-0">
                     <span className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[var(--color-gold)]">
                       {r.category}
                     </span>

@@ -14,7 +14,7 @@ export function ContactBand() {
       >
         Besoin d&apos;un devis nettoyage à Paris ou en Île-de-France ?
       </h2>
-      <p className="mb-7 text-sm tracking-wide text-[var(--color-navy)]/70">
+      <p className="mb-7 text-sm tracking-wide text-[var(--color-navy)]/85">
         Réponse sous 24h — Gratuit &amp; sans engagement
       </p>
 

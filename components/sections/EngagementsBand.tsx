@@ -22,9 +22,9 @@ export function EngagementsBand() {
                 <Icon size={22} strokeWidth={1.5} />
               </span>
               <div>
-                <h3 className="font-serif text-lg font-semibold text-white">
+                <h2 className="font-serif text-lg font-semibold text-white">
                   {title}
-                </h3>
+                </h2>
                 <p className="mt-1 text-sm leading-relaxed text-white/55">
                   {desc}
                 </p>

@@ -89,7 +89,7 @@ export default function ParisHubPage() {
 
 
           <div className="container-tgt relative z-10">
-            <nav aria-label="Fil d'Ariane" className="mb-8 text-xs text-white/50">
+            <nav aria-label="Fil d'Ariane" className="mb-8 text-xs text-white/70">
               <Link href="/" className="transition-colors hover:text-[var(--color-gold)]">
                 Accueil
               </Link>
@@ -444,7 +444,7 @@ export default function ParisHubPage() {
                   <h3 className="font-serif text-xl font-semibold text-white">
                     {item.title}
                   </h3>
-                  <p className="text-sm leading-relaxed text-white/50">{item.desc}</p>
+                  <p className="text-sm leading-relaxed text-white/70">{item.desc}</p>
                 </div>
               ))}
             </div>

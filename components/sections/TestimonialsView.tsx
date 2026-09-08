@@ -101,7 +101,7 @@ function AvatarInitials({ name }: { name: string }) {
 
 function StarRow({ rating }: { rating: number }) {
   return (
-    <div className="flex gap-0.5" aria-label={`${rating} étoiles sur 5`}>
+    <div className="flex gap-0.5" role="img" aria-label={`${rating} étoiles sur 5`}>
       {Array.from({ length: 5 }, (_, i) => (
         <Star
           key={i}

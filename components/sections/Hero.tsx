@@ -108,7 +108,7 @@ export function Hero() {
                   s.num
                 )}
               </div>
-              <div className="mt-2 text-[10px] uppercase tracking-[0.2em] text-white/50">
+              <div className="mt-2 text-[10px] uppercase tracking-[0.2em] text-white/70">
                 {s.label}
               </div>
             </li>
