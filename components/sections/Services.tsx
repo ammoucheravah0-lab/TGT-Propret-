@@ -45,7 +45,9 @@ function PoleDivider({ label, tag }: { label: string; tag: string }) {
 // La carte occupe 100 % de la largeur : la photo couvre tout le fond, un
 // dégradé blanc remonte du bas et le contenu se pose dessus. Le texte est
 // borné en largeur pour rester lisible sur grand écran.
-// Seule la première image de la section est préchargée — le reste est en lazy.
+// Toutes les photos sont en chargement différé : la section commence à ~2 écrans
+// sous la ligne de flottaison, un préchargement y volerait de la bande passante
+// au visuel du hero (élément LCP).
 
 function ServiceCard({
   slug,
@@ -54,7 +56,6 @@ function ServiceCard({
   Icon,
   title,
   shortDesc,
-  priority = false,
   isSpecialty = false,
 }: {
   slug: string;
@@ -63,7 +64,6 @@ function ServiceCard({
   Icon: React.ComponentType<{ size?: number; strokeWidth?: number }>;
   title: string;
   shortDesc: string;
-  priority?: boolean;
   isSpecialty?: boolean;
 }) {
   return (
@@ -78,7 +78,6 @@ function ServiceCard({
         fill
         sizes="(min-width: 1280px) 1200px, 100vw"
         className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
-        priority={priority}
       />
 
       {/* Dégradé blanc : lisibilité du texte posé dessus */}
@@ -129,7 +128,7 @@ function ServiceCard({
             {shortDesc}
           </p>
 
-          <span className="mt-5 inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold)] transition-all duration-300 md:-translate-x-[5px] md:opacity-0 md:group-hover:translate-x-0 md:group-hover:opacity-100">
+          <span className="mt-5 inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold-text)] transition-all duration-300 md:-translate-x-[5px] md:opacity-0 md:group-hover:translate-x-0 md:group-hover:opacity-100">
             En savoir plus <ArrowRight size={12} aria-hidden="true" />
           </span>
         </div>
@@ -168,7 +167,7 @@ export function Services() {
 
           <h2 className="font-serif text-[clamp(40px,5vw,68px)] font-semibold leading-none tracking-tight text-[var(--color-navy)]">
             Nos services de{" "}
-            <em className="italic text-[var(--color-gold)]">
+            <em className="italic text-[var(--color-gold-title)]">
               nettoyage professionnel
             </em>
           </h2>
@@ -211,7 +210,6 @@ export function Services() {
                       Icon={Icon}
                       title={title}
                       shortDesc={shortDesc}
-                      priority={poleIndex === 0 && i === 0}
                       isSpecialty={num === "01"}
                     />
                   ))}
@@ -224,7 +222,7 @@ export function Services() {
         <Reveal className="mt-12 text-center">
           <Link
             href="/services"
-            className="inline-flex items-center gap-2 border border-[var(--color-navy)]/20 bg-white px-7 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-navy)] transition-all hover:-translate-y-0.5 hover:border-[var(--color-gold)] hover:text-[var(--color-gold)]"
+            className="inline-flex items-center gap-2 border border-[var(--color-navy)]/20 bg-white px-7 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-navy)] transition-all hover:-translate-y-0.5 hover:border-[var(--color-gold)] hover:text-[var(--color-gold-text)]"
           >
             Voir le détail de nos prestations
             <ArrowRight size={14} aria-hidden="true" />

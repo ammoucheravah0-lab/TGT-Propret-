@@ -82,7 +82,7 @@ export default async function ArrondissementPage({
               <span className="text-white">{arr.name}</span>
             </nav>
 
-            <SectionLabel>
+            <SectionLabel onDark>
               Paris {arr.number}
               <sup>e</sup> · {arr.postalCode}
             </SectionLabel>
@@ -205,7 +205,7 @@ export default async function ArrondissementPage({
                       {/* Pas de shortDesc ici : répété sur 40 pages géo, il
                           diluait la part de contenu propre à l'arrondissement. */}
                       {s.priceRange && (
-                        <span className="mt-auto pt-2 text-[11px] font-semibold uppercase tracking-[0.15em] text-[var(--color-gold)]">
+                        <span className="mt-auto pt-2 text-[11px] font-semibold uppercase tracking-[0.15em] text-[var(--color-gold-text)]">
                           {s.priceRange}
                         </span>
                       )}

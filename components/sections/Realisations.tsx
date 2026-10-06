@@ -28,7 +28,7 @@ export function Realisations() {
           <SectionLabel centered>Avant / Après</SectionLabel>
 
           <h2 className="font-serif text-[clamp(40px,5vw,68px)] font-semibold leading-none tracking-tight text-[var(--color-navy)]">
-            Nos <em className="italic text-[var(--color-gold)]">Réalisations</em>
+            Nos <em className="italic text-[var(--color-gold-title)]">Réalisations</em>
           </h2>
 
           <p className="mt-3 text-[15px] leading-relaxed text-[var(--color-muted)]">
@@ -57,10 +57,11 @@ export function Realisations() {
                   beforeAlt={`${r.title} — avant intervention`}
                   afterAlt={`${r.title} — après intervention TGT Propreté`}
                   ratio={r.ratio ?? "4 / 3"}
+                  className="max-h-[58vh] sm:max-h-[420px] lg:max-h-[460px]"
                 />
-                <figcaption className="flex items-start justify-between gap-4 px-6 py-5">
-                  <div>
-                    <span className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[var(--color-gold)]">
+                <figcaption className="flex flex-col gap-1 px-6 py-5 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
+                  <div className="min-w-0">
+                    <span className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[var(--color-gold-text)]">
                       {r.category}
                     </span>
                     <h3 className="mt-1 font-serif text-xl font-semibold text-[var(--color-navy)]">

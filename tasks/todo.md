@@ -418,3 +418,103 @@ et note visible sur toutes les pages testées.
 - [ ] `ID_photo_M.png` : 225×225px affiché jusqu'à 500×667 → agrandissement ×3.
 - [ ] « Lire l'article » en `opacity-0` sans survol : invisible sur mobile.
 - [ ] `WhyUs.tsx` porte `id="zones"` alors que la vraie section est `zones-intervention`.
+
+### Lot 2 bis — points non bloquants soldés (2026-08-11)
+
+- [x] **Carrousel d'avis** — la largeur des cartes passe en CSS (`basis-*`
+      responsives) : le HTML du serveur est déjà dans la bonne disposition, fini
+      le saut « 1 carte pleine largeur → 3 » à l'hydratation. Le pas de
+      défilement est mesuré sur le DOM (`ResizeObserver`) au lieu de redéclarer
+      les seuils en JavaScript — plus de divergence possible entre JS et CSS.
+      Avec moins d'avis que de colonnes, les cartes s'étalent au lieu de laisser
+      un trou. Note : piloter le `transform` par variable CSS a été essayé puis
+      abandonné — Chrome ne ré-anime pas de façon fiable un `transform` dérivé
+      d'une custom property.
+- [x] **Pastilles du carrousel** : cible tactile 6×6 → 48×44 px (le point reste
+      visuellement à 6px, c'est le bouton qui l'entoure qui grandit).
+- [x] **Zones tactiles** : liens de zones du pied de page (16 → 30px),
+      communes du bandeau Zones (20 → 36px), pastilles d'arrondissements et de
+      zones liées, liens tél./mail du bandeau Contact (20 → 44px).
+- [x] **Grilles `gap-px`** : plus de cellule de fond vide — pôle à service unique
+      en pleine largeur, 3 articles sur 3 colonnes dès `md`, dernier élément
+      orphelin étendu sur la ligne.
+- [x] **« Lire l'article »** : visible sur mobile (`md:opacity-0` au lieu de
+      `opacity-0`), même correction sur les cartes de la page Paris.
+- [x] **Bandeau Zones** : grille → colonnes CSS, les départements très inégaux
+      (9 communes pour le 92, 1 pour le 78) ne laissent plus 230px de vide.
+- [x] **Portrait de Malika** : ce n'était pas une photo mais un avatar générique
+      de 225×225 étiré en 500×667, présenté comme « Portrait de Malika Tlili ».
+      Remplacé par un monogramme « MT » assumé, dans le même cadre doré.
+      → **À remplacer dès réception d'une vraie photo.**
+- [x] `ID_photo.jpg` passée en `next/image` (187 Ko servis en entier sur mobile).
+- [x] `WhyUs` portait `id="zones"` : renommé `pourquoi-nous` (une ancre `#zones`
+      atterrissait sur « Pourquoi nous choisir » au lieu du bandeau Zones).
+
+**Vérifié au navigateur** : 390 / 768 / 1440px — 0 débordement, carrousel testé
+au clic (aller/retour, bornes), monogramme, cibles tactiles mesurées.
+
+### Reste ouvert
+- [ ] Photo de Malika à demander au client.
+- [ ] Deux `<img>` bruts subsistent (carte de visite, logo de retour en haut) :
+      sans impact mesuré, remplacement par `next/image` à faire à l'occasion.
+
+---
+
+## Session 2026-08-11 (suite) — Réalisations, responsive, Lighthouse
+
+### Réalisations — hauteur d'image
+- [x] 5 des 6 réalisations sont en ratio `3 / 4`. En colonnes de ~560px, chaque
+      comparateur faisait **747px de haut**. Hauteur plafonnée à
+      `58vh` sur mobile, `420px` en `sm`, `460px` en `lg` : le cadrage se recentre
+      par `object-cover` au lieu d'étirer la page.
+- [x] Légende : titre et localisation se disputaient la largeur sous ~420px —
+      empilés sous `sm`, côte à côte au-delà.
+
+### Poids des images
+- [x] Sources recompressées et bornées à 2000px : **25,9 Mo → 4,5 Mo** pour les
+      visuels de prestations (une seule photo pesait 4 Mo pour 7008px de large),
+      **3,2 Mo → 2,2 Mo** pour les comparateurs avant/après.
+- [x] `logo.png` était servi **brut, 98 Ko**, pour un affichage de 100px : c'était
+      la plus grosse requête de l'accueil. Passé par `next/image`, comme la carte
+      de visite (53 Ko bruts, sur deux pages).
+- [x] Le premier visuel de prestation était préchargé (`priority`) alors qu'il se
+      trouve ~2 écrans sous la ligne de flottaison : il volait de la bande
+      passante au visuel du hero, qui porte le LCP.
+
+### Lighthouse — mesuré, pas supposé
+Audits réels via Lighthouse 12 en local (`npx lighthouse`, Chrome headless).
+
+**Desktop : 11 pages sur 12 en 100 / 100 / 100 / 100.** L'accueil oscille entre
+99 et 100 (LCP à 0,9 s), le reste est stable.
+
+**Mobile : accessibilité, bonnes pratiques et SEO à 100 sur toutes les pages.**
+La performance mobile de l'accueil mesure entre 78 et 91 d'une passe à l'autre
+**sur la même build** : c'est du bruit de machine, pas du signal. `/services`
+mesure 94. Le chiffre qui fait foi est celui de PageSpeed Insights sur le site
+déployé, où s'appliquent le CDN, Brotli et un matériel de référence.
+
+### Corrections d'accessibilité
+- [x] `aria-label` posé sur des `<div>` sans rôle (barres d'étoiles) → `role="img"`.
+- [x] Ordre des titres : la bande d'engagements posait des `h3` juste après le
+      `h1` du hero ; le pied de page des `h4` après des `h2`.
+- [x] FAQ : `<details>` n'est pas un enfant valide de `<dl>`, ni `<dt>` un enfant
+      valide de `<summary>`. Structure simplifiée — la sémantique FAQ pour Google
+      passe de toute façon par le JSON-LD.
+- [x] Nom accessible du logo : le texte visible « TGTPropreté » n'était pas contenu
+      dans l'`aria-label`.
+- [x] **Contraste** — le doré de marque `#c9a84c` ne donne que **2,3:1 sur blanc**.
+      Deux déclinaisons ont été introduites pour les fonds clairs :
+      `--color-gold-text` (#7f6614, 5,5:1) pour le texte courant et
+      `--color-gold-title` (#9c7c22, 3,9:1) pour les grands titres en italique.
+      Le doré de marque reste inchangé sur fond navy, sur les aplats et les
+      bordures. Une trentaine d'éléments étaient sous le seuil, y compris des
+      libellés de navigation et des liens dans le corps des articles.
+
+### Piste non prise (décision produit)
+- [ ] La performance mobile de l'accueil est bornée par le volume de la page :
+      ~1470 éléments, 16 prestations en pleine largeur, 5 comparateurs, un pied
+      de page très dense. Le levier restant est d'**afficher 6 prestations sur
+      l'accueil** avec un lien vers les 16 — arbitrage éditorial, pas technique.
+- [ ] `content-visibility: auto` a été essayé sur les sections hors écran :
+      **régression nette** (performance 87 → 79, Speed Index 2,4 s → 4,2 s).
+      Écarté, mesures à l'appui.

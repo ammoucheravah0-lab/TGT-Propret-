@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
@@ -59,7 +60,7 @@ export default function DevisPage() {
               <span className="text-white">Devis</span>
             </nav>
 
-            <SectionLabel>Devis gratuit</SectionLabel>
+            <SectionLabel onDark>Devis gratuit</SectionLabel>
             <h1 className="mt-3 font-serif text-[clamp(36px,5.5vw,68px)] font-light leading-[1.05]">
               Devis gratuit pour votre{" "}
               <em className="italic text-[var(--color-gold)]">nettoyage à Paris</em>
@@ -155,7 +156,7 @@ export default function DevisPage() {
                     href={`tel:${p.tel}`}
                     className="group inline-flex items-center gap-3 transition-all duration-300 hover:text-[var(--color-gold)] hover:translate-x-1"
                   >
-                    <Phone size={15} aria-hidden="true" className="text-[var(--color-gold)] transition-transform group-hover:scale-110" /> 
+                    <Phone size={15} aria-hidden="true" className="text-[var(--color-gold-text)] transition-transform group-hover:scale-110" /> 
                     <span>{p.label}</span>
                   </a>
                 </li>
@@ -165,7 +166,7 @@ export default function DevisPage() {
                   href={`mailto:${CONTACT.email}`}
                   className="group inline-flex items-center gap-3 transition-all duration-300 hover:text-[var(--color-gold)] hover:translate-x-1"
                 >
-                  <Mail size={15} aria-hidden="true" className="text-[var(--color-gold)] transition-transform group-hover:scale-110" /> 
+                  <Mail size={15} aria-hidden="true" className="text-[var(--color-gold-text)] transition-transform group-hover:scale-110" /> 
                   <span className="break-all">{CONTACT.email}</span>
                 </a>
               </li>
@@ -174,10 +175,13 @@ export default function DevisPage() {
           
           {/* Conteneur de la Carte de Visite animée */}
           <div className="relative group overflow-hidden rounded-xl border border-white/10 shadow-2xl transition-all duration-500 hover:shadow-[var(--color-gold)]/10 hover:border-[var(--color-gold)]/30">
-            <img 
-              src="/images/Carte_de_visite.jpg" 
-              alt="Notre carte de visite" 
-              className="w-full h-auto object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            <Image
+              src="/images/Carte_de_visite.jpg"
+              alt="Notre carte de visite"
+              width={1050}
+              height={600}
+              sizes="(min-width: 1024px) 340px, calc(100vw - 4rem)"
+              className="h-auto w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
           </div>

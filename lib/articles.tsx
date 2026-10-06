@@ -199,13 +199,13 @@ export const ARTICLES: readonly Article[] = [
         <p>
           Vous voulez un devis détaillé sur vos bureaux à Paris ? Décrivez votre
           besoin sur notre{" "}
-          <Link href="/devis" className="text-[var(--color-gold)] underline">
+          <Link href="/devis" className="text-[var(--color-gold-text)] underline">
             page de demande de devis
           </Link>{" "}
           ou consultez{" "}
           <Link
             href="/services/nettoyage-bureaux-entreprises"
-            className="text-[var(--color-gold)] underline"
+            className="text-[var(--color-gold-text)] underline"
           >
             notre page Nettoyage Bureaux
           </Link>
@@ -413,12 +413,12 @@ export const ARTICLES: readonly Article[] = [
           Pour un devis détaillé sur votre immeuble, consultez{" "}
           <Link
             href="/services/nettoyage-coproprietes-immeubles"
-            className="text-[var(--color-gold)] underline"
+            className="text-[var(--color-gold-text)] underline"
           >
             notre page Nettoyage Copropriété
           </Link>{" "}
           ou{" "}
-          <Link href="/devis" className="text-[var(--color-gold)] underline">
+          <Link href="/devis" className="text-[var(--color-gold-text)] underline">
             envoyez-nous votre demande
           </Link>
           . Nous revenons sous 24h avec une proposition adaptée à votre
@@ -486,7 +486,7 @@ export const ARTICLES: readonly Article[] = [
         <p>
           Demandez 2 ou 3 références dans des contextes similaires au vôtre.
           Une société qui intervient déjà dans votre arrondissement —{" "}
-          <Link href="/zones/paris" className="text-[var(--color-gold)] underline">
+          <Link href="/zones/paris" className="text-[var(--color-gold-text)] underline">
             voir nos zones d&apos;intervention à Paris
           </Link>{" "}
           — connaît les contraintes locales (accès, stationnement, codes
@@ -539,11 +539,11 @@ export const ARTICLES: readonly Article[] = [
           rencontrer, demandez le devis détaillé, vérifiez l&apos;assurance, et
           n&apos;hésitez pas à comparer 2 ou 3 propositions. Pour découvrir
           notre approche et nos zones d&apos;intervention,{" "}
-          <Link href="/zones/paris" className="text-[var(--color-gold)] underline">
+          <Link href="/zones/paris" className="text-[var(--color-gold-text)] underline">
             consultez notre page Paris
           </Link>{" "}
           ou{" "}
-          <Link href="/devis" className="text-[var(--color-gold)] underline">
+          <Link href="/devis" className="text-[var(--color-gold-text)] underline">
             demandez un devis gratuit
           </Link>
           .

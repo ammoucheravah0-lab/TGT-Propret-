@@ -91,7 +91,7 @@ function AvatarInitials({ name }: { name: string }) {
     .slice(0, 2)
     .toUpperCase();
   return (
-    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[var(--color-navy)] font-serif text-sm font-semibold text-[var(--color-gold)]">
+    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[var(--color-navy)] font-serif text-sm font-semibold text-[var(--color-gold-text)]">
       {initials}
     </span>
   );
@@ -101,7 +101,7 @@ function AvatarInitials({ name }: { name: string }) {
 
 function StarRow({ rating }: { rating: number }) {
   return (
-    <div className="flex gap-0.5" aria-label={`${rating} étoiles sur 5`}>
+    <div className="flex gap-0.5" role="img" aria-label={`${rating} étoiles sur 5`}>
       {Array.from({ length: 5 }, (_, i) => (
         <Star
           key={i}
@@ -203,7 +203,7 @@ function GoldDivider({ label, sub }: { label: ReactNode; sub?: string }) {
         aria-hidden="true"
       />
       {sub && (
-        <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[var(--color-gold)]">
+        <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[var(--color-gold-text)]">
           {sub}
         </p>
       )}
@@ -474,7 +474,7 @@ export function TestimonialsView({ reviews }: { reviews: GoogleReviewItem[] }) {
               label={
                 <>
                   Ils nous font{" "}
-                  <em className="italic text-[var(--color-gold)]">confiance</em>
+                  <em className="italic text-[var(--color-gold-title)]">confiance</em>
                 </>
               }
             />
@@ -513,7 +513,7 @@ export function TestimonialsView({ reviews }: { reviews: GoogleReviewItem[] }) {
                 className="font-serif text-[clamp(30px,4vw,52px)] font-light leading-none"
               >
                 Ce que disent nos{" "}
-                <em className="italic text-[var(--color-gold)]">clients</em>
+                <em className="italic text-[var(--color-gold-title)]">clients</em>
               </h2>
 
               <p className="text-[15px] leading-relaxed text-[var(--color-muted)]">

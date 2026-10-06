@@ -89,7 +89,7 @@ export default function ParisHubPage() {
 
 
           <div className="container-tgt relative z-10">
-            <nav aria-label="Fil d'Ariane" className="mb-8 text-xs text-white/50">
+            <nav aria-label="Fil d'Ariane" className="mb-8 text-xs text-white/70">
               <Link href="/" className="transition-colors hover:text-[var(--color-gold)]">
                 Accueil
               </Link>
@@ -97,7 +97,7 @@ export default function ParisHubPage() {
               <span className="text-white/80">Paris</span>
             </nav>
 
-            <SectionLabel>Zone d&apos;intervention principale</SectionLabel>
+            <SectionLabel onDark>Zone d&apos;intervention principale</SectionLabel>
 
             <h1 className="mt-4 font-serif text-[clamp(44px,6.5vw,84px)] font-light leading-[1.01]">
               Entreprise de nettoyage{" "}
@@ -184,7 +184,7 @@ export default function ParisHubPage() {
                 <span className="font-serif text-3xl font-light text-[var(--color-navy)]">
                   {s.number}
                 </span>
-                <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[rgba(13,34,68,0.6)]">
+                <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[rgba(13,34,68,0.9)]">
                   {s.label}
                 </span>
               </div>
@@ -200,7 +200,7 @@ export default function ParisHubPage() {
             {/* SECTION 1 : Arrondissements principaux */}
             <h2 className="relative mt-3 inline-block font-serif text-[clamp(32px,4.5vw,52px)] font-light leading-tight">
               Nos secteurs d&apos;intervention{" "}
-              <em className="italic text-[var(--color-gold)]">principaux</em>
+              <em className="italic text-[var(--color-gold-title)]">principaux</em>
               <span
                 aria-hidden="true"
                 className="absolute -bottom-2 left-0 block h-px w-full bg-gradient-to-r from-[#c9a84c]/0 via-[#c9a84c] to-[#c9a84c]/0"
@@ -232,7 +232,7 @@ export default function ParisHubPage() {
                       >
                         <MapPin size={20} strokeWidth={1.5} />
                       </span>
-                      <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold)]">
+                      <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold-text)]">
                         {arr.postalCode}
                       </span>
                     </div>
@@ -242,7 +242,7 @@ export default function ParisHubPage() {
                     </h3>
                     <p className="text-sm text-[var(--color-muted)] leading-relaxed">{arr.district}</p>
 
-                    <span className="mt-auto inline-flex items-center gap-1.5 pt-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold)]">
+                    <span className="mt-auto inline-flex items-center gap-1.5 pt-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold-text)]">
                       Voir la page
                       <ArrowRight size={12} className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
                     </span>
@@ -255,7 +255,7 @@ export default function ParisHubPage() {
             <div className="mt-20">
               <h2 className="relative inline-block font-serif text-[clamp(28px,3.5vw,42px)] font-light leading-tight">
                 Nous intervenons également{" "}
-                <em className="italic text-[var(--color-gold)]">partout dans Paris</em>
+                <em className="italic text-[var(--color-gold-title)]">partout dans Paris</em>
                 <span
                   aria-hidden="true"
                   className="absolute -bottom-2 left-0 block h-px w-full bg-gradient-to-r from-transparent via-[#c9a84c] to-transparent"
@@ -319,7 +319,7 @@ export default function ParisHubPage() {
 
             <h2 className="relative mt-3 inline-block font-serif text-[clamp(32px,4.5vw,52px)] font-light leading-tight">
               {SERVICES.length} prestations couvertes,{" "}
-              <em className="italic text-[var(--color-gold)]">un seul interlocuteur</em>
+              <em className="italic text-[var(--color-gold-title)]">un seul interlocuteur</em>
               <span
                 aria-hidden="true"
                 className="absolute -bottom-2 left-0 block h-px w-full bg-gradient-to-r from-transparent via-[#c9a84c] to-transparent"
@@ -382,7 +382,7 @@ export default function ParisHubPage() {
                       {/* Section prix / pied de carte aligné en bas */}
                       {s.priceRange && (
                         <div className="mt-auto pt-4 flex items-center justify-between border-t border-gray-50">
-                          <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold)]">
+                          <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold-text)]">
                             {s.priceRange}
                           </span>
                           <span className="text-[11px] font-medium text-[var(--color-muted)] transition-opacity duration-300 md:opacity-0 md:group-hover:opacity-100">
@@ -401,11 +401,11 @@ export default function ParisHubPage() {
         {/* ── POURQUOI NOUS ── */}
         <section className="bg-[var(--color-navy)] px-5 py-16 md:px-10 md:py-24">
           <div className="container-tgt">
-            <SectionLabel>Pourquoi nous choisir</SectionLabel>
+            <SectionLabel onDark>Pourquoi nous choisir</SectionLabel>
 
             <h2 className="relative mt-3 inline-block font-serif text-[clamp(32px,4.5vw,52px)] font-light leading-tight text-white">
               L&apos;excellence,{" "}
-              <em className="italic text-[var(--color-gold)]">pas une promesse</em>
+              <em className="italic text-[var(--color-gold-title)]">pas une promesse</em>
               <span
                 aria-hidden="true"
                 className="absolute -bottom-2 left-0 h-px w-full"
@@ -438,13 +438,13 @@ export default function ParisHubPage() {
                   key={item.n}
                   className="flex flex-col gap-4 border border-[rgba(201,168,76,0.1)] bg-[rgba(255,255,255,0.03)] p-10 transition-colors duration-300 hover:border-[rgba(201,168,76,0.28)] hover:bg-[rgba(201,168,76,0.04)]"
                 >
-                  <span className="font-serif text-5xl font-light text-[rgba(201,168,76,0.2)]">
+                  <span className="font-serif text-5xl font-light text-[rgba(201,168,76,0.7)]" aria-hidden="true">
                     {item.n}
                   </span>
                   <h3 className="font-serif text-xl font-semibold text-white">
                     {item.title}
                   </h3>
-                  <p className="text-sm leading-relaxed text-white/50">{item.desc}</p>
+                  <p className="text-sm leading-relaxed text-white/70">{item.desc}</p>
                 </div>
               ))}
             </div>
@@ -458,7 +458,7 @@ export default function ParisHubPage() {
 
             <h2 className="relative mt-3 inline-block font-serif text-[clamp(32px,4.5vw,52px)] font-light leading-tight">
               Ils nous font{" "}
-              <em className="italic text-[var(--color-gold)]">confiance</em>
+              <em className="italic text-[var(--color-gold-title)]">confiance</em>
               <span
                 aria-hidden="true"
                 className="absolute -bottom-2 left-0 h-px w-full"
@@ -475,7 +475,7 @@ export default function ParisHubPage() {
                   key={t.name}
                   className="flex flex-col gap-4 border-t-[3px] border-[var(--color-gold)] bg-white p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_48px_rgba(13,34,68,0.1)]"
                 >
-                  <div className="flex gap-1" aria-label={`${t.rating}/5`}>
+                  <div className="flex gap-1" role="img" aria-label={`${t.rating} étoiles sur 5`}>
                     {Array.from({ length: 5 }, (_, i) => (
                       <Star
                         key={i}

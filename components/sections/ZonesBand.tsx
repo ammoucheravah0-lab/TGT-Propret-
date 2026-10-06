@@ -29,7 +29,7 @@ export function ZonesBand() {
               className="font-serif text-[clamp(36px,5vw,60px)] font-light leading-none text-[var(--color-navy)]"
             >
               Zones d&apos;intervention{" "}
-              <em className="italic text-[var(--color-gold)]">
+              <em className="italic text-[var(--color-gold-title)]">
                 en Île-de-France
               </em>
             </h2>
@@ -53,7 +53,7 @@ export function ZonesBand() {
             className="group flex flex-col gap-3 border border-[var(--color-navy)]/10 bg-[var(--color-navy)] p-8 text-white transition-all hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(13,34,68,0.18)] md:flex-row md:items-center md:justify-between"
           >
             <span>
-              <span className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold)]">
+              <span className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold-text)]">
                 <MapPin size={13} aria-hidden="true" />
                 Paris · 75
               </span>
@@ -62,7 +62,7 @@ export function ZonesBand() {
                 arrondissements de Paris
               </span>
             </span>
-            <span className="inline-flex flex-shrink-0 items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-gold)]">
+            <span className="inline-flex flex-shrink-0 items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-gold-text)]">
               Voir le hub Paris
               <ArrowRight
                 size={14}
@@ -78,7 +78,7 @@ export function ZonesBand() {
             <div key={dept.code} className="mb-8 break-inside-avoid">
               <h3 className="font-serif text-lg font-semibold text-[var(--color-navy)]">
                 {dept.name}{" "}
-                <span className="font-sans text-xs text-[var(--color-gold)]">
+                <span className="font-sans text-xs text-[var(--color-gold-text)]">
                   {dept.code}
                 </span>
               </h3>
@@ -101,7 +101,7 @@ export function ZonesBand() {
         <Reveal className="mt-12 text-center">
           <Link
             href="/zones"
-            className="inline-flex items-center gap-2 border border-[var(--color-navy)]/20 bg-white px-7 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-navy)] transition-all hover:-translate-y-0.5 hover:border-[var(--color-gold)] hover:text-[var(--color-gold)]"
+            className="inline-flex items-center gap-2 border border-[var(--color-navy)]/20 bg-white px-7 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-navy)] transition-all hover:-translate-y-0.5 hover:border-[var(--color-gold)] hover:text-[var(--color-gold-text)]"
           >
             Toutes nos zones d&apos;intervention
             <ArrowRight size={14} aria-hidden="true" />

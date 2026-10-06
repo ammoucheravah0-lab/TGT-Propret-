@@ -17,11 +17,11 @@ export function Footer() {
           <div>
             <div className="font-serif text-3xl font-light tracking-[0.15em] text-white">
               TGT<span className="text-[var(--color-gold)]">Propreté</span>{" "}
-              <span className="text-sm tracking-wider text-white/30">Soigné</span>
+              <span className="text-sm tracking-wider text-white/65">Soigné</span>
               <div className="mt-6 w-24 h-[2px] bg-gradient-to-r from-transparent to-[#c9a84c]"></div>
             </div>
 
-            <p className="mt-3 max-w-[280px] text-sm leading-relaxed text-white/40">
+            <p className="mt-3 max-w-[280px] text-sm leading-relaxed text-white/70">
               Entreprise de nettoyage professionnel à Paris et en Île-de-France.
               Devis gratuit sous 24h.
             </p>
@@ -82,16 +82,16 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="mb-5 text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold)]">
+            <h2 className="mb-5 text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold)]">
               Services
-            </h4>
+            </h2>
             <Link
               href="/services"
               className="mb-3 inline-flex min-h-11 items-center text-sm font-semibold text-white/80 transition-colors hover:text-[var(--color-gold)]"
             >
               Toutes nos prestations →
             </Link>
-            <ul className="space-y-2.5 text-sm text-white/50">
+            <ul className="space-y-2.5 text-sm text-white/75">
               {SERVICES.map((s) => (
                 <li key={s.slug}>
                   <Link
@@ -103,10 +103,10 @@ export function Footer() {
                 </li>
               ))}
             </ul>
-            <h4 className="mb-3 mt-6 text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold)]">
+            <h2 className="mb-3 mt-6 text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold)]">
               Ressources
-            </h4>
-            <ul className="space-y-2 text-sm text-white/50">
+            </h2>
+            <ul className="space-y-2 text-sm text-white/75">
               <li>
                 <Link
                   href="/blog"
@@ -127,9 +127,9 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="mb-5 text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold)]">
+            <h2 className="mb-5 text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold)]">
               Paris
-            </h4>
+            </h2>
             <Link
               href="/zones/paris"
               className="mb-3 inline-flex min-h-11 items-center text-sm font-semibold text-white/80 transition-colors hover:text-[var(--color-gold)]"
@@ -152,9 +152,9 @@ export function Footer() {
                 ))}
             </ul>
 
-            <h4 className="mb-3 mt-6 text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold)]">
+            <h2 className="mb-3 mt-6 text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold)]">
               Île-de-France
-            </h4>
+            </h2>
             <Link
               href="/zones"
               className="mb-3 inline-flex min-h-11 items-center text-sm font-semibold text-white/80 transition-colors hover:text-[var(--color-gold)]"
@@ -173,17 +173,17 @@ export function Footer() {
                 </li>
               ))}
             </ul>
-            <p className="mt-4 text-xs text-white/30">
+            <p className="mt-4 text-xs text-white/65">
               Départements desservis :{" "}
               {IDF_DEPARTMENTS.map((d) => d.code).join(" · ")}
             </p>
           </div>
 
           <div>
-            <h4 className="mb-5 text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold)]">
+            <h2 className="mb-5 text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold)]">
               Contact
-            </h4>
-            <ul className="space-y-3 text-sm text-white/55">
+            </h2>
+            <ul className="space-y-3 text-sm text-white/75">
               {CONTACT.phones.map((p) => (
                 <li key={p.tel}>
                   <a
@@ -218,10 +218,10 @@ export function Footer() {
                 </span>
               </li>
             </ul>
-            <h4 className="mb-3 mt-6 text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold)]">
+            <h2 className="mb-3 mt-6 text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gold)]">
               Légal
-            </h4>
-            <ul className="space-y-2 text-sm text-white/50">
+            </h2>
+            <ul className="space-y-2 text-sm text-white/75">
               <li>
                 <Link
                   href="/mentions-legales"
@@ -242,7 +242,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col items-start gap-2 pt-7 text-xs text-white/25 md:flex-row md:items-center md:justify-between">
+        <div className="flex flex-col items-start gap-2 pt-7 text-xs text-white/65 md:flex-row md:items-center md:justify-between">
           <span>© {year} {SITE.brand} — Tous droits réservés</span>
           <span>
             Siège : {CONTACT.address.city}, {CONTACT.address.postalCode} ·{" "}

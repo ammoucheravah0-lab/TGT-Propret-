@@ -39,7 +39,7 @@ export function Hero() {
           <span className="h-px w-5 bg-[var(--color-gold)]" aria-hidden="true" />
         </div>
 
-        <h1 className="animate-fade-up-1 font-serif text-[clamp(40px,7.5vw,92px)] font-light leading-[0.98] tracking-tight text-white">
+        <h1 className="animate-slide-up font-serif text-[clamp(40px,7.5vw,92px)] font-light leading-[0.98] tracking-tight text-white">
           Entreprise de nettoyage
           <br />
           <em className="italic text-[var(--color-gold)]">à Paris</em>
@@ -49,7 +49,7 @@ export function Hero() {
           </span>
         </h1>
 
-        <p className="animate-fade-up-2 mx-auto mt-6 max-w-[600px] text-base leading-relaxed tracking-wide text-white/70 md:text-lg">
+        <p className="animate-slide-up-1 mx-auto mt-6 max-w-[600px] text-base leading-relaxed tracking-wide text-white/70 md:text-lg">
           Solutions de nettoyage sur-mesure pour professionnels et copropriétés :
           <em> bureaux, locaux commerciaux, fins de chantier, vitrages, et bien plus encore. </em>
           Devis gratuit sous 24h pour tous les arrondissements de <em className=" text-[var(--color-gold)]">Paris </em> et
@@ -108,7 +108,7 @@ export function Hero() {
                   s.num
                 )}
               </div>
-              <div className="mt-2 text-[10px] uppercase tracking-[0.2em] text-white/50">
+              <div className="mt-2 text-[10px] uppercase tracking-[0.2em] text-white/70">
                 {s.label}
               </div>
             </li>
