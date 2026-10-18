@@ -1,0 +1,223 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #0d2244;
+  --color-navy-2: #152d5a;
+  --color-gold: #c9a84c;
+  --color-gold-2: #e8c870;
+  /* Le doré de marque (#c9a84c) ne donne que 2,3:1 sur blanc : illisible en
+     petit corps. Cette déclinaison plus profonde tient 5,5:1 sur blanc et
+     4,9:1 sur crème, tout en restant du doré. Réservée au TEXTE sur fond
+     clair ; bordures, aplats et grands titres gardent le doré de marque. */
+  --color-gold-text: #7f6614;
+  /* Grands titres sur fond clair : 3,9:1 sur blanc, 3,5:1 sur crème. */
+  --color-gold-title: #9c7c22;
+  --color-cream: #f5f0e8;
+  --color-light: #fdfcf9;
+  --color-ink: #1a1a2e;
+  --color-muted: #6b6b80;
+
+  --font-serif: var(--font-cormorant), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-jost), system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Hauteur réelle de la barre de navigation : ~69px, ~81px en sm, ~89px en
+       md et au-delà. Une ancre visée trop court passe sous la barre. */
+    scroll-padding-top: 5.5rem;
+  }
+  @media (min-width: 768px) {
+    html {
+      scroll-padding-top: 6.5rem;
+    }
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--color-light);
+    color: var(--color-ink);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Réserve la hauteur de la barre d'appel collante (mobile / tablette),
+       sinon elle recouvre en permanence le bas du pied de page. */
+    padding-bottom: calc(3.25rem + env(safe-area-inset-bottom));
+  }
+  @media (min-width: 1024px) {
+    body {
+      padding-bottom: 0;
+    }
+  }
+
+  /* Un enfant de grille vaut `min-width: auto` par défaut : il ne peut pas
+     descendre sous la largeur intrinsèque de son contenu. Un `select` dont une
+     option est longue, un bouton très espacé ou un champ suffisent alors à
+     élargir la piste au-delà du conteneur, et la page déborde — masqué par
+     l'`overflow-x: hidden` du body, donc invisible autrement qu'en mesurant.
+     `:where()` garde une spécificité nulle : n'importe quelle classe
+     utilitaire reprend la main si un bloc doit vraiment garder sa taille. */
+  :where(.grid) > * {
+    min-width: 0;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background: var(--color-gold);
+    color: var(--color-navy);
+  }
+}
+
+@layer utilities {
+  .font-serif {
+    font-family: var(--font-serif);
+  }
+  .font-sans {
+    font-family: var(--font-sans);
+  }
+
+}
+
+/* `container-tgt` vit dans la couche `components`, pas `utilities` : déclarée
+   dans `utilities`, elle passait APRÈS les classes générées par Tailwind et
+   gagnait à spécificité égale. Résultat, sur `container-tgt max-w-[760px]`
+   (corps des articles) ou `container-tgt max-w-[820px]` (FAQ), la largeur
+   maximale était silencieusement ramenée à 1200px — soit ~180 caractères par
+   ligne sur grand écran. En couche `components`, toute classe utilitaire posée
+   à côté reprend la main, ce qui est le comportement attendu.
+
+   Le padding suit un clamp plutôt qu'un saut de 1rem à 2,5rem : le saut se
+   cumulait au `px-10` des sections et faisait *rétrécir* le contenu au passage
+   de 767px à 768px (695px utiles → 608px). */
+@layer components {
+  .container-tgt {
+    max-width: 1200px;
+    margin-inline: auto;
+    padding-inline: clamp(1rem, 2vw, 1.5rem);
+  }
+}
+
+/* Reveal on scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hero animations */
+/* L'entrée du hero part d'une opacité NON nulle et d'une durée courte.
+   Chrome ignore les éléments à `opacity: 0` pour le LCP : le paragraphe
+   d'accroche n'était donc « peint » qu'à la fin de son animation, et le LCP
+   mobile grimpait à 4 s pour un texte pourtant présent dans le HTML dès la
+   première réponse. Le mouvement reste perceptible, le texte est mesurable
+   dès la première image. */
+@keyframes fade-up {
+  from {
+    opacity: 0.25;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes float-1 {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-30px, 30px) scale(1.1);
+  }
+}
+@keyframes float-2 {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(20px, -20px) scale(0.95);
+  }
+}
+@keyframes scroll-pulse {
+  0%,
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) scaleY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(-50%) scaleY(1);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.6s ease-out both;
+}
+.animate-fade-up-1 {
+  animation: fade-up 0.6s 0.06s ease-out both;
+}
+/* Le titre et l'accroche du hero portent le LCP : ils glissent sans jamais
+   descendre en opacité, pour être « peints » dès la première image. */
+.animate-slide-up {
+  animation: slide-up 0.6s ease-out both;
+}
+.animate-slide-up-1 {
+  animation: slide-up 0.6s 0.08s ease-out both;
+}
+@keyframes slide-up {
+  from {
+    transform: translateY(16px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+.animate-fade-up-2 {
+  animation: fade-up 0.6s 0.12s ease-out both;
+}
+.animate-fade-up-3 {
+  animation: fade-up 0.6s 0.18s ease-out both;
+}
+.animate-float-1 {
+  animation: float-1 8s ease-in-out infinite;
+}
+.animate-float-2 {
+  animation: float-2 10s ease-in-out infinite;
+}
+.animate-scroll-pulse {
+  animation: scroll-pulse 2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
